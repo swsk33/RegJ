@@ -84,12 +84,12 @@
 ### 好的，以上添加、删除、查询和导出这四个操作都是以操作HKEY_CLASSES_ROOT这一基层类别键为例。如要操作其它键，把上面所有语句的方法名里面的键的简写（HKCR）换成其它键简写即可。
 简写对应列表:<br>
 全称 | 简写
--|-
-HKEY_CLASSES_ROOT | HKCR
-HKEY_CURRENT_USER | HKCU
-HKEY_LOCAL_MACHINE | HKLM
-HKEY_USERS | HKU
-HKEY_CURRENT_CONFIG | HKCC
+:-:|:-:
+HKEY_CLASSES_ROOT | HKCR |
+HKEY_CURRENT_USER | HKCU |
+HKEY_LOCAL_MACHINE | HKLM |
+HKEY_USERS | HKU |
+HKEY_CURRENT_CONFIG | HKCC |
 
 **例如把HKEY_CURRENT_CONFIG里的Software\Fonts导出到E盘，保存为exp.reg:**
 ```new RegExport().exportHKCC("Software\\Fonts","E:\\exp.reg");```<br>

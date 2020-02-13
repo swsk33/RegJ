@@ -1,5 +1,6 @@
 # RegJ使用说明
 ### 一个简易的、可以用java操作注册表的包。
+#### 注意：注册表是系统重要数据，操作时请小心谨慎！
 ### 其功能有：
 1，添加注册表项。<br>
 2，删除注册表项。<br>
@@ -46,6 +47,8 @@
 ```new RegAdd().addHKCR("AAM\\shell\\test");```<br>
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项,并指定其子项类型为字符串值且值为2333:**<br>
 ```new RegAdd().addHKCR("AAM\\shell\\test","REG_SZ","2333");```<br>
+
+**注意：如果指定注册表存在，添加操作会将其覆盖！**<br>
 #### (2)删除注册表项：
 ##### 这里以删除HKEY_CLASSES_ROOT里面的项为例。
 

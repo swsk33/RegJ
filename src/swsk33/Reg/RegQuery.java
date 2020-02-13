@@ -83,7 +83,7 @@ public class RegQuery {
 		}
 		return result;
 	}
-	public boolean isHKCRexistsve(String name) throws Exception {		//判断HKEY_CLASSES_ROOT下的某一项的默认值是否存在
+	public boolean isHKCRexistsve(String name) throws Exception {		//判断HKEY_CLASSES_ROOT下的某一项的默认值是有内容（不为空）
 		boolean result=false;
 		String cmd="cmd /c reg query HKCR\\"+name+" /ve";
 		Process run=Runtime.getRuntime().exec(cmd);
@@ -96,7 +96,7 @@ public class RegQuery {
 			cdr=br.readLine();
 		}
 		br.close();
-		if(res.equals("")) {
+		if(res.contains("数值未设置")) {
 			result=false;
 		} else {
 			result=true;

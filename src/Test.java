@@ -1,7 +1,7 @@
 import swsk33.Reg.*;
 public class Test {
 	public static void main(String[] args) throws Exception {
-		RegQuery rq=new RegQuery();
-		System.out.println(rq.isHKCRexistsve("*\\shell\\用ps打开"));
+		RegExport re=new RegExport();
+		re.exportHKCR("*\\shell\\用ps打开","E:\\s.reg");
 	}
 }

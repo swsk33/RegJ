@@ -29,6 +29,9 @@
 ```new RegAdd().addHKCR(项名称,数据值)```<br>
 添加一个项到HKEY_CLASSES_ROOT中并指定其子项的类型和值:<br>
 ```new RegAdd().addHKCR(项名称,其子项类型,子项值)```<br>
+添加一个项到HKEY_CLASSES_ROOT中并指定其子项的名称、类型和值:<br>
+```new RegAdd().addHKCR(项名称,子项类型,子项名称,子项值)```<br>
+
 **这里类型对应如下:**<br>
 ```REG_SZ```:字符串值<br>
 ```REG_MULTI_SZ```:多字符串值<br>
@@ -38,9 +41,6 @@
 ```REG_BINARY```:二进制值<br>
 ```REG_NONE```:无<br>
 不分大小写。<br>
-
-添加一个项到HKEY_CLASSES_ROOT中并指定其子项的名称、类型和值:<br>
-```new RegAdd().addHKCR(项名称,子项类型,子项名称,子项值)```<br>
 
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项:**<br>
 ```new RegAdd().addHKCR("AAM\\shell\\test");```<br>

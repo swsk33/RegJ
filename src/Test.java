@@ -6,7 +6,7 @@ public class Test {
 		RegExport rep=new RegExport();
 		RegImport ri=new RegImport();
 		RegQuery rq=new RegQuery();
-		
+		ri.importReg("C:\\Users\\swsk33\\Downloads\\s s\\s.reg");
 	}
 
 }

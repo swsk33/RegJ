@@ -99,8 +99,9 @@
 
 ```new RegImport().importReg(reg文件路径)```<br>
 
-**注意！若某项的值里面有"(单引号)，请在方法参数中用\"代替！若有\（反斜杠）,则用\\代替！**
+**注意！若某项的值里面有"(双引号)，请在方法参数中用\\\"(三反斜杠加一个双引号)代替！单引号相同。**<br>
+**若有\（反斜杠）,则用\\代替！**<br>
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项,并指定其子项类型为字符串值且值为\and":**<br>
-```new RegAdd().addHKCR("AAM\\shell\\test","REG_SZ","\\and\"");```<br>
+```new RegAdd().addHKCR("AAM\\shell\\test","REG_SZ","\\and\\\"");```<br>
 
 >最后更新:2020.2.18

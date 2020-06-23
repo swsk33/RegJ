@@ -104,4 +104,4 @@
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项,并指定其子项类型为字符串值且值为\and":**<br>
 ```new RegAdd().addHKCR("AAM\\shell\\test","REG_SZ","\\and\\\"");```<br>
 
->最后更新:2020.2.18
+>最后更新:2020.6.23

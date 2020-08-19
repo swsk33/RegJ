@@ -1,27 +1,27 @@
 package swsk33.Reg;
 
 public class RegExport {
-	public void exportHKCR(String name, String filepath) throws Exception { // µ¼³öHKEY_CLASSES_ROOTÀïÃæµÄÄ³Ò»Ïî
+	public void exportHKCR(String name, String filepath) throws Exception { // å¯¼å‡ºHKEY_CLASSES_ROOTé‡Œé¢çš„æŸä¸€é¡¹
 		String cmd = "cmd /c reg export \"HKCR\\" + name + "\"" + " " + "\"" + filepath + "\"" + " /y";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void exportHKCU(String name, String filepath) throws Exception { // µ¼³öHKEY_CURRENT_USERÀïÃæµÄÄ³Ò»Ïî
+	public void exportHKCU(String name, String filepath) throws Exception { // å¯¼å‡ºHKEY_CURRENT_USERé‡Œé¢çš„æŸä¸€é¡¹
 		String cmd = "cmd /c reg export \"HKCU\\" + name + "\"" + " " + "\"" + filepath + "\"" + " /y";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void exportHKLM(String name, String filepath) throws Exception { // µ¼³öHKEY_LOCAL_MACHINEÀïÃæµÄÄ³Ò»Ïî
+	public void exportHKLM(String name, String filepath) throws Exception { // å¯¼å‡ºHKEY_LOCAL_MACHINEé‡Œé¢çš„æŸä¸€é¡¹
 		String cmd = "cmd /c reg export \"HKLM\\" + name + "\"" + " " + "\"" + filepath + "\"" + " /y";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void exportHKU(String name, String filepath) throws Exception { // µ¼³öHKEY_USERSÀïÃæµÄÄ³Ò»Ïî
+	public void exportHKU(String name, String filepath) throws Exception { // å¯¼å‡ºHKEY_USERSé‡Œé¢çš„æŸä¸€é¡¹
 		String cmd = "cmd /c reg export \"HKU\\" + name + "\"" + " " + "\"" + filepath + "\"" + " /y";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void exportHKCC(String name, String filepath) throws Exception { // µ¼³öHKEY_CURRENT_CONFIGÀïÃæµÄÄ³Ò»Ïî
+	public void exportHKCC(String name, String filepath) throws Exception { // å¯¼å‡ºHKEY_CURRENT_CONFIGé‡Œé¢çš„æŸä¸€é¡¹
 		String cmd = "cmd /c reg export \"HKCC\\" + name + "\"" + " " + "\"" + filepath + "\"" + " /y";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}

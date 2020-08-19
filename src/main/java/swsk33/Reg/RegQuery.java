@@ -3,8 +3,8 @@ package swsk33.Reg;
 import java.io.*;
 
 public class RegQuery {
-	// ²éÑ¯HKEY_CLASSES_ROOT
-	public String queryHKCR(String name) throws Exception { // ²éÑ¯HKEY_CLASSES_ROOTÏÂµÄÄ³Ïî¼°ÆäËùÓĞ×ÓÏîµÄÃû³Æ¡¢ÀàĞÍºÍÖµ
+	// æŸ¥è¯¢HKEY_CLASSES_ROOT
+	public String queryHKCR(String name) throws Exception { // æŸ¥è¯¢HKEY_CLASSES_ROOTä¸‹çš„æŸé¡¹åŠå…¶æ‰€æœ‰å­é¡¹çš„åç§°ã€ç±»å‹å’Œå€¼
 		String result = "";
 		String cmd = "cmd /c reg query \"HKCR\\" + name + "\"" + " /s";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -19,7 +19,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public String queryHKCR(String name, String objname) throws Exception { // ²éÑ¯HKEY_CLASSES_ROOTÏÂµÄÄ³ÏîµÄ×ÓÏîµÄĞÅÏ¢
+	public String queryHKCR(String name, String objname) throws Exception { // æŸ¥è¯¢HKEY_CLASSES_ROOTä¸‹çš„æŸé¡¹çš„å­é¡¹çš„ä¿¡æ¯
 		String result = "";
 		String cmd = "cmd /c reg query \"HKCR\\" + name + "\"" + " /v " + "\"" + objname + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -34,7 +34,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public String queryHKCRve(String name) throws Exception { // ²éÑ¯HKEY_CLASSES_ROOTÏÂµÄÄ³ÏîµÄÄ¬ÈÏ×ÓÏîĞÅÏ¢
+	public String queryHKCRve(String name) throws Exception { // æŸ¥è¯¢HKEY_CLASSES_ROOTä¸‹çš„æŸé¡¹çš„é»˜è®¤å­é¡¹ä¿¡æ¯
 		String result = "";
 		String cmd = "cmd /c reg query \"HKCR\\" + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -49,7 +49,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKCRexists(String name) throws Exception { // ÅĞ¶ÏHKEY_CLASSES_ROOTÏÂµÄÄ³Ò»ÏîÊÇ·ñ´æÔÚ
+	public boolean isHKCRexists(String name) throws Exception { // åˆ¤æ–­HKEY_CLASSES_ROOTä¸‹çš„æŸä¸€é¡¹æ˜¯å¦å­˜åœ¨
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKCR\\" + name + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -70,7 +70,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKCRexists(String name, String objname) throws Exception { // ÅĞ¶ÏHKEY_CLASSES_ROOTÏÂµÄÄ³Ò»ÏîµÄ×ÓÏîÊÇ·ñ´æÔÚ
+	public boolean isHKCRexists(String name, String objname) throws Exception { // åˆ¤æ–­HKEY_CLASSES_ROOTä¸‹çš„æŸä¸€é¡¹çš„å­é¡¹æ˜¯å¦å­˜åœ¨
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKCR\\" + name + "\"" + " /v " + "\"" + objname + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -91,7 +91,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKCRexistsve(String name) throws Exception { // ÅĞ¶ÏHKEY_CLASSES_ROOTÏÂµÄÄ³Ò»ÏîµÄÄ¬ÈÏÖµÊÇÓĞÄÚÈİ£¨²»Îª¿Õ£©
+	public boolean isHKCRexistsve(String name) throws Exception { // åˆ¤æ–­HKEY_CLASSES_ROOTä¸‹çš„æŸä¸€é¡¹çš„é»˜è®¤å€¼æ˜¯æœ‰å†…å®¹ï¼ˆä¸ä¸ºç©ºï¼‰
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKCR\\" + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -104,7 +104,7 @@ public class RegQuery {
 			cdr = br.readLine();
 		}
 		br.close();
-		if (res.contains("ÊıÖµÎ´ÉèÖÃ") || res.equals("")) {
+		if (res.contains("æ•°å€¼æœªè®¾ç½®") || res.equals("")) {
 			result = false;
 		} else {
 			result = true;
@@ -112,8 +112,8 @@ public class RegQuery {
 		return result;
 	}
 
-	// ²éÑ¯HKEY_CURRENT_USER
-	public String queryHKCU(String name) throws Exception { // ²éÑ¯HKEY_CURRENT_USERÏÂµÄÄ³Ïî¼°ÆäËùÓĞ×ÓÏîµÄÃû³Æ¡¢ÀàĞÍºÍÖµ
+	// æŸ¥è¯¢HKEY_CURRENT_USER
+	public String queryHKCU(String name) throws Exception { // æŸ¥è¯¢HKEY_CURRENT_USERä¸‹çš„æŸé¡¹åŠå…¶æ‰€æœ‰å­é¡¹çš„åç§°ã€ç±»å‹å’Œå€¼
 		String result = "";
 		String cmd = "cmd /c reg query \"HKCU\\" + name + "\"" + " /s";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -128,7 +128,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public String queryHKCU(String name, String objname) throws Exception { // ²éÑ¯HKEY_CURRENT_USERÏÂµÄÄ³ÏîµÄ×ÓÏîµÄĞÅÏ¢
+	public String queryHKCU(String name, String objname) throws Exception { // æŸ¥è¯¢HKEY_CURRENT_USERä¸‹çš„æŸé¡¹çš„å­é¡¹çš„ä¿¡æ¯
 		String result = "";
 		String cmd = "cmd /c reg query \"HKCU\\" + name + "\"" + " /v " + "\"" + objname + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -143,7 +143,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public String queryHKCUve(String name) throws Exception { // ²éÑ¯HKEY_CURRENT_USERÏÂµÄÄ³ÏîµÄÄ¬ÈÏ×ÓÏîĞÅÏ¢
+	public String queryHKCUve(String name) throws Exception { // æŸ¥è¯¢HKEY_CURRENT_USERä¸‹çš„æŸé¡¹çš„é»˜è®¤å­é¡¹ä¿¡æ¯
 		String result = "";
 		String cmd = "cmd /c reg query \"HKCU\\" + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -158,7 +158,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKCUexists(String name) throws Exception { // ÅĞ¶ÏHKEY_CURRENT_USERÏÂµÄÄ³Ò»ÏîÊÇ·ñ´æÔÚ
+	public boolean isHKCUexists(String name) throws Exception { // åˆ¤æ–­HKEY_CURRENT_USERä¸‹çš„æŸä¸€é¡¹æ˜¯å¦å­˜åœ¨
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKCU\\" + name + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -179,7 +179,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKCUexists(String name, String objname) throws Exception { // ÅĞ¶ÏHKEY_CURRENT_USERÏÂµÄÄ³Ò»ÏîµÄ×ÓÏîÊÇ·ñ´æÔÚ
+	public boolean isHKCUexists(String name, String objname) throws Exception { // åˆ¤æ–­HKEY_CURRENT_USERä¸‹çš„æŸä¸€é¡¹çš„å­é¡¹æ˜¯å¦å­˜åœ¨
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKCU\\" + name + "\"" + " /v " + "\"" + objname + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -200,7 +200,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKCUexistsve(String name) throws Exception { // ÅĞ¶ÏHKEY_CURRENT_USERÏÂµÄÄ³Ò»ÏîµÄÄ¬ÈÏÖµÊÇÓĞÄÚÈİ£¨²»Îª¿Õ£©
+	public boolean isHKCUexistsve(String name) throws Exception { // åˆ¤æ–­HKEY_CURRENT_USERä¸‹çš„æŸä¸€é¡¹çš„é»˜è®¤å€¼æ˜¯æœ‰å†…å®¹ï¼ˆä¸ä¸ºç©ºï¼‰
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKCU\\" + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -213,7 +213,7 @@ public class RegQuery {
 			cdr = br.readLine();
 		}
 		br.close();
-		if (res.contains("ÊıÖµÎ´ÉèÖÃ") || res.equals("")) {
+		if (res.contains("æ•°å€¼æœªè®¾ç½®") || res.equals("")) {
 			result = false;
 		} else {
 			result = true;
@@ -221,8 +221,8 @@ public class RegQuery {
 		return result;
 	}
 
-	// ²éÑ¯HKEY_LOCAL_MACHINE
-	public String queryHKLM(String name) throws Exception { // ²éÑ¯HKEY_LOCAL_MACHINEÏÂµÄÄ³Ïî¼°ÆäËùÓĞ×ÓÏîµÄÃû³Æ¡¢ÀàĞÍºÍÖµ
+	// æŸ¥è¯¢HKEY_LOCAL_MACHINE
+	public String queryHKLM(String name) throws Exception { // æŸ¥è¯¢HKEY_LOCAL_MACHINEä¸‹çš„æŸé¡¹åŠå…¶æ‰€æœ‰å­é¡¹çš„åç§°ã€ç±»å‹å’Œå€¼
 		String result = "";
 		String cmd = "cmd /c reg query \"HKLM\\" + name + "\"" + " /s";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -237,7 +237,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public String queryHKLM(String name, String objname) throws Exception { // ²éÑ¯HKEY_LOCAL_MACHINEÏÂµÄÄ³ÏîµÄ×ÓÏîµÄĞÅÏ¢
+	public String queryHKLM(String name, String objname) throws Exception { // æŸ¥è¯¢HKEY_LOCAL_MACHINEä¸‹çš„æŸé¡¹çš„å­é¡¹çš„ä¿¡æ¯
 		String result = "";
 		String cmd = "cmd /c reg query \"HKLM\\" + name + "\"" + " /v " + "\"" + objname + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -252,7 +252,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public String queryHKLMve(String name) throws Exception { // ²éÑ¯HKEY_LOCAL_MACHINEÏÂµÄÄ³ÏîµÄÄ¬ÈÏ×ÓÏîĞÅÏ¢
+	public String queryHKLMve(String name) throws Exception { // æŸ¥è¯¢HKEY_LOCAL_MACHINEä¸‹çš„æŸé¡¹çš„é»˜è®¤å­é¡¹ä¿¡æ¯
 		String result = "";
 		String cmd = "cmd /c reg query \"HKLM\\" + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -267,7 +267,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKLMexists(String name) throws Exception { // ÅĞ¶ÏHKEY_LOCAL_MACHINEÏÂµÄÄ³Ò»ÏîÊÇ·ñ´æÔÚ
+	public boolean isHKLMexists(String name) throws Exception { // åˆ¤æ–­HKEY_LOCAL_MACHINEä¸‹çš„æŸä¸€é¡¹æ˜¯å¦å­˜åœ¨
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKLM\\" + name + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -288,7 +288,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKLMexists(String name, String objname) throws Exception { // ÅĞ¶ÏHKEY_LOCAL_MACHINEÏÂµÄÄ³Ò»ÏîµÄ×ÓÏîÊÇ·ñ´æÔÚ
+	public boolean isHKLMexists(String name, String objname) throws Exception { // åˆ¤æ–­HKEY_LOCAL_MACHINEä¸‹çš„æŸä¸€é¡¹çš„å­é¡¹æ˜¯å¦å­˜åœ¨
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKLM\\" + name + "\"" + " /v " + "\"" + objname + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -309,7 +309,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKLMexistsve(String name) throws Exception { // ÅĞ¶ÏHKEY_LOCAL_MACHINEÏÂµÄÄ³Ò»ÏîµÄÄ¬ÈÏÖµÊÇÓĞÄÚÈİ£¨²»Îª¿Õ£©
+	public boolean isHKLMexistsve(String name) throws Exception { // åˆ¤æ–­HKEY_LOCAL_MACHINEä¸‹çš„æŸä¸€é¡¹çš„é»˜è®¤å€¼æ˜¯æœ‰å†…å®¹ï¼ˆä¸ä¸ºç©ºï¼‰
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKLM\\" + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -322,7 +322,7 @@ public class RegQuery {
 			cdr = br.readLine();
 		}
 		br.close();
-		if (res.contains("ÊıÖµÎ´ÉèÖÃ") || res.equals("")) {
+		if (res.contains("æ•°å€¼æœªè®¾ç½®") || res.equals("")) {
 			result = false;
 		} else {
 			result = true;
@@ -330,8 +330,8 @@ public class RegQuery {
 		return result;
 	}
 
-	// ²éÑ¯HKEY_USERS
-	public String queryHKU(String name) throws Exception { // ²éÑ¯HKEY_USERSÏÂµÄÄ³Ïî¼°ÆäËùÓĞ×ÓÏîµÄÃû³Æ¡¢ÀàĞÍºÍÖµ
+	// æŸ¥è¯¢HKEY_USERS
+	public String queryHKU(String name) throws Exception { // æŸ¥è¯¢HKEY_USERSä¸‹çš„æŸé¡¹åŠå…¶æ‰€æœ‰å­é¡¹çš„åç§°ã€ç±»å‹å’Œå€¼
 		String result = "";
 		String cmd = "cmd /c reg query \"HKU\\" + name + "\"" + " /s";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -346,7 +346,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public String queryHKU(String name, String objname) throws Exception { // ²éÑ¯HKEY_USERSÏÂµÄÄ³ÏîµÄ×ÓÏîµÄĞÅÏ¢
+	public String queryHKU(String name, String objname) throws Exception { // æŸ¥è¯¢HKEY_USERSä¸‹çš„æŸé¡¹çš„å­é¡¹çš„ä¿¡æ¯
 		String result = "";
 		String cmd = "cmd /c reg query \"HKU\\" + name + "\"" + " /v " + "\"" + objname + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -361,7 +361,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public String queryHKUve(String name) throws Exception { // ²éÑ¯HKEY_USERSÏÂµÄÄ³ÏîµÄÄ¬ÈÏ×ÓÏîĞÅÏ¢
+	public String queryHKUve(String name) throws Exception { // æŸ¥è¯¢HKEY_USERSä¸‹çš„æŸé¡¹çš„é»˜è®¤å­é¡¹ä¿¡æ¯
 		String result = "";
 		String cmd = "cmd /c reg query \"HKU\\" + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -376,7 +376,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKUexists(String name) throws Exception { // ÅĞ¶ÏHKEY_USERSÏÂµÄÄ³Ò»ÏîÊÇ·ñ´æÔÚ
+	public boolean isHKUexists(String name) throws Exception { // åˆ¤æ–­HKEY_USERSä¸‹çš„æŸä¸€é¡¹æ˜¯å¦å­˜åœ¨
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKU\\" + name + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -397,7 +397,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKUexists(String name, String objname) throws Exception { // ÅĞ¶ÏHKEY_USERSÏÂµÄÄ³Ò»ÏîµÄ×ÓÏîÊÇ·ñ´æÔÚ
+	public boolean isHKUexists(String name, String objname) throws Exception { // åˆ¤æ–­HKEY_USERSä¸‹çš„æŸä¸€é¡¹çš„å­é¡¹æ˜¯å¦å­˜åœ¨
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKU\\" + name + "\"" + " /v " + "\"" + objname + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -418,7 +418,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKUexistsve(String name) throws Exception { // ÅĞ¶ÏHKEY_USERSÏÂµÄÄ³Ò»ÏîµÄÄ¬ÈÏÖµÊÇÓĞÄÚÈİ£¨²»Îª¿Õ£©
+	public boolean isHKUexistsve(String name) throws Exception { // åˆ¤æ–­HKEY_USERSä¸‹çš„æŸä¸€é¡¹çš„é»˜è®¤å€¼æ˜¯æœ‰å†…å®¹ï¼ˆä¸ä¸ºç©ºï¼‰
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKU\\" + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -431,7 +431,7 @@ public class RegQuery {
 			cdr = br.readLine();
 		}
 		br.close();
-		if (res.contains("ÊıÖµÎ´ÉèÖÃ") || res.equals("")) {
+		if (res.contains("æ•°å€¼æœªè®¾ç½®") || res.equals("")) {
 			result = false;
 		} else {
 			result = true;
@@ -439,8 +439,8 @@ public class RegQuery {
 		return result;
 	}
 
-	// ²éÑ¯HKEY_CURRENT_CONFIG
-	public String queryHKCC(String name) throws Exception { // ²éÑ¯HKEY_CURRENT_CONFIGÏÂµÄÄ³Ïî¼°ÆäËùÓĞ×ÓÏîµÄÃû³Æ¡¢ÀàĞÍºÍÖµ
+	// æŸ¥è¯¢HKEY_CURRENT_CONFIG
+	public String queryHKCC(String name) throws Exception { // æŸ¥è¯¢HKEY_CURRENT_CONFIGä¸‹çš„æŸé¡¹åŠå…¶æ‰€æœ‰å­é¡¹çš„åç§°ã€ç±»å‹å’Œå€¼
 		String result = "";
 		String cmd = "cmd /c reg query \"HKCC\\" + name + "\"" + " /s";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -455,7 +455,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public String queryHKCC(String name, String objname) throws Exception { // ²éÑ¯HKEY_CURRENT_CONFIGÏÂµÄÄ³ÏîµÄ×ÓÏîµÄĞÅÏ¢
+	public String queryHKCC(String name, String objname) throws Exception { // æŸ¥è¯¢HKEY_CURRENT_CONFIGä¸‹çš„æŸé¡¹çš„å­é¡¹çš„ä¿¡æ¯
 		String result = "";
 		String cmd = "cmd /c reg query \"HKCC\\" + name + "\"" + " /v " + "\"" + objname + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -470,7 +470,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public String queryHKCCve(String name) throws Exception { // ²éÑ¯HKEY_CURRENT_CONFIGÏÂµÄÄ³ÏîµÄÄ¬ÈÏ×ÓÏîĞÅÏ¢
+	public String queryHKCCve(String name) throws Exception { // æŸ¥è¯¢HKEY_CURRENT_CONFIGä¸‹çš„æŸé¡¹çš„é»˜è®¤å­é¡¹ä¿¡æ¯
 		String result = "";
 		String cmd = "cmd /c reg query \"HKCC\\" + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -485,7 +485,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKCCexists(String name) throws Exception { // ÅĞ¶ÏHKEY_CURRENT_CONFIGÏÂµÄÄ³Ò»ÏîÊÇ·ñ´æÔÚ
+	public boolean isHKCCexists(String name) throws Exception { // åˆ¤æ–­HKEY_CURRENT_CONFIGä¸‹çš„æŸä¸€é¡¹æ˜¯å¦å­˜åœ¨
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKCC\\" + name + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -506,7 +506,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKCCexists(String name, String objname) throws Exception { // ÅĞ¶ÏHKEY_CURRENT_CONFIGÏÂµÄÄ³Ò»ÏîµÄ×ÓÏîÊÇ·ñ´æÔÚ
+	public boolean isHKCCexists(String name, String objname) throws Exception { // åˆ¤æ–­HKEY_CURRENT_CONFIGä¸‹çš„æŸä¸€é¡¹çš„å­é¡¹æ˜¯å¦å­˜åœ¨
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKCC\\" + name + "\"" + " /v " + "\"" + objname + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -527,7 +527,7 @@ public class RegQuery {
 		return result;
 	}
 
-	public boolean isHKCCexistsve(String name) throws Exception { // ÅĞ¶ÏHKEY_CURRENT_CONFIGÏÂµÄÄ³Ò»ÏîµÄÄ¬ÈÏÖµÊÇÓĞÄÚÈİ£¨²»Îª¿Õ£©
+	public boolean isHKCCexistsve(String name) throws Exception { // åˆ¤æ–­HKEY_CURRENT_CONFIGä¸‹çš„æŸä¸€é¡¹çš„é»˜è®¤å€¼æ˜¯æœ‰å†…å®¹ï¼ˆä¸ä¸ºç©ºï¼‰
 		boolean result = false;
 		String cmd = "cmd /c reg query \"HKCC\\" + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -540,7 +540,7 @@ public class RegQuery {
 			cdr = br.readLine();
 		}
 		br.close();
-		if (res.contains("ÊıÖµÎ´ÉèÖÃ") || res.equals("")) {
+		if (res.contains("æ•°å€¼æœªè®¾ç½®") || res.equals("")) {
 			result = false;
 		} else {
 			result = true;

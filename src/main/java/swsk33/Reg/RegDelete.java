@@ -1,82 +1,82 @@
 package swsk33.Reg;
 
 public class RegDelete {
-	// ²Ù×÷HKEY_CLASSES_ROOT
-	public void delHKCR(String name) throws Exception { // É¾³ıHKEY_CLASSES_ROOTÀïÃæµÄÄ³Ïî¼°ÆäËùÓĞ×ÓÏî
+	// æ“ä½œHKEY_CLASSES_ROOT
+	public void delHKCR(String name) throws Exception { // åˆ é™¤HKEY_CLASSES_ROOTé‡Œé¢çš„æŸé¡¹åŠå…¶æ‰€æœ‰å­é¡¹
 		String cmd = "cmd /c reg delete \"HKCR\\" + name + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void delHKCR(String name, String objname) throws Exception { // É¾³ıHKEY_CLASSES_ROOTÀïÃæµÄÄ³ÏîµÄÄ³¸ö×ÓÏî
+	public void delHKCR(String name, String objname) throws Exception { // åˆ é™¤HKEY_CLASSES_ROOTé‡Œé¢çš„æŸé¡¹çš„æŸä¸ªå­é¡¹
 		String cmd = "cmd /c reg delete \"HKCR\\" + name + "\"" + " /v " + "\"" + objname + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void delHKCRve(String name) throws Exception { // É¾³ıHKEY_CLASSES_ROOTÀïÃæµÄÄ³ÏîµÄÄ¬ÈÏÖµ
+	public void delHKCRve(String name) throws Exception { // åˆ é™¤HKEY_CLASSES_ROOTé‡Œé¢çš„æŸé¡¹çš„é»˜è®¤å€¼
 		String cmd = "cmd /c reg delete \"HKCR\\" + name + "\"" + " /ve " + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	// ²Ù×÷HKEY_CURRENT_USER
-	public void delHKCU(String name) throws Exception { // É¾³ıHKEY_CURRENT_USERÀïÃæµÄÄ³Ïî¼°ÆäËùÓĞ×ÓÏî
+	// æ“ä½œHKEY_CURRENT_USER
+	public void delHKCU(String name) throws Exception { // åˆ é™¤HKEY_CURRENT_USERé‡Œé¢çš„æŸé¡¹åŠå…¶æ‰€æœ‰å­é¡¹
 		String cmd = "cmd /c reg delete \"HKCU\\" + name + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void delHKCU(String name, String objname) throws Exception { // É¾³ıHKEY_CURRENT_USERÀïÃæµÄÄ³ÏîµÄÄ³¸ö×ÓÏî
+	public void delHKCU(String name, String objname) throws Exception { // åˆ é™¤HKEY_CURRENT_USERé‡Œé¢çš„æŸé¡¹çš„æŸä¸ªå­é¡¹
 		String cmd = "cmd /c reg delete \"HKCU\\" + name + "\"" + " /v " + "\"" + objname + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void delHKCUve(String name) throws Exception { // É¾³ıHKEY_CURRENT_USERÀïÃæµÄÄ³ÏîµÄÄ¬ÈÏÖµ
+	public void delHKCUve(String name) throws Exception { // åˆ é™¤HKEY_CURRENT_USERé‡Œé¢çš„æŸé¡¹çš„é»˜è®¤å€¼
 		String cmd = "cmd /c reg delete \"HKCU\\" + name + "\"" + " /ve " + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	// ²Ù×÷HKEY_LOCAL_MACHINE
-	public void delHKLM(String name) throws Exception { // É¾³ıHKEY_LOCAL_MACHINEÀïÃæµÄÄ³Ïî¼°ÆäËùÓĞ×ÓÏî
+	// æ“ä½œHKEY_LOCAL_MACHINE
+	public void delHKLM(String name) throws Exception { // åˆ é™¤HKEY_LOCAL_MACHINEé‡Œé¢çš„æŸé¡¹åŠå…¶æ‰€æœ‰å­é¡¹
 		String cmd = "cmd /c reg delete \"HKLM\\" + name + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void delHKLM(String name, String objname) throws Exception { // É¾³ıHKEY_LOCAL_MACHINEÀïÃæµÄÄ³ÏîµÄÄ³¸ö×ÓÏî
+	public void delHKLM(String name, String objname) throws Exception { // åˆ é™¤HKEY_LOCAL_MACHINEé‡Œé¢çš„æŸé¡¹çš„æŸä¸ªå­é¡¹
 		String cmd = "cmd /c reg delete \"HKLM\\" + name + "\"" + " /v " + "\"" + objname + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void delHKLMve(String name) throws Exception { // É¾³ıHKEY_LOCAL_MACHINEÀïÃæµÄÄ³ÏîµÄÄ¬ÈÏÖµ
+	public void delHKLMve(String name) throws Exception { // åˆ é™¤HKEY_LOCAL_MACHINEé‡Œé¢çš„æŸé¡¹çš„é»˜è®¤å€¼
 		String cmd = "cmd /c reg delete \"HKLM\\" + name + "\"" + " /ve " + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	// ²Ù×÷HKEY_USERS
-	public void delHKU(String name) throws Exception { // É¾³ıHKEY_USERSÀïÃæµÄÄ³Ïî¼°ÆäËùÓĞ×ÓÏî
+	// æ“ä½œHKEY_USERS
+	public void delHKU(String name) throws Exception { // åˆ é™¤HKEY_USERSé‡Œé¢çš„æŸé¡¹åŠå…¶æ‰€æœ‰å­é¡¹
 		String cmd = "cmd /c reg delete \"HKU\\" + name + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void delHKU(String name, String objname) throws Exception { // É¾³ıHKEY_USERSÀïÃæµÄÄ³ÏîµÄÄ³¸ö×ÓÏî
+	public void delHKU(String name, String objname) throws Exception { // åˆ é™¤HKEY_USERSé‡Œé¢çš„æŸé¡¹çš„æŸä¸ªå­é¡¹
 		String cmd = "cmd /c reg delete \"HKU\\" + name + "\"" + " /v " + "\"" + objname + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void delHKUve(String name) throws Exception { // É¾³ıHKEY_USERSÀïÃæµÄÄ³ÏîµÄÄ¬ÈÏÖµ
+	public void delHKUve(String name) throws Exception { // åˆ é™¤HKEY_USERSé‡Œé¢çš„æŸé¡¹çš„é»˜è®¤å€¼
 		String cmd = "cmd /c reg delete \"HKU\\" + name + "\"" + " /ve " + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	// ²Ù×÷HKEY_CURRENT_CONFIG
-	public void delHKCC(String name) throws Exception { // É¾³ıHKEY_CURRENT_CONFIGÀïÃæµÄÄ³Ïî¼°ÆäËùÓĞ×ÓÏî
+	// æ“ä½œHKEY_CURRENT_CONFIG
+	public void delHKCC(String name) throws Exception { // åˆ é™¤HKEY_CURRENT_CONFIGé‡Œé¢çš„æŸé¡¹åŠå…¶æ‰€æœ‰å­é¡¹
 		String cmd = "cmd /c reg delete \"HKCC\\" + name + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void delHKCC(String name, String objname) throws Exception { // É¾³ıHKEY_CURRENT_CONFIGÀïÃæµÄÄ³ÏîµÄÄ³¸ö×ÓÏî
+	public void delHKCC(String name, String objname) throws Exception { // åˆ é™¤HKEY_CURRENT_CONFIGé‡Œé¢çš„æŸé¡¹çš„æŸä¸ªå­é¡¹
 		String cmd = "cmd /c reg delete \"HKCC\\" + name + "\"" + " /v " + "\"" + objname + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
 
-	public void delHKCCve(String name) throws Exception { // É¾³ıHKEY_CURRENT_CONFIGÀïÃæµÄÄ³ÏîµÄÄ¬ÈÏÖµ
+	public void delHKCCve(String name) throws Exception { // åˆ é™¤HKEY_CURRENT_CONFIGé‡Œé¢çš„æŸé¡¹çš„é»˜è®¤å€¼
 		String cmd = "cmd /c reg delete \"HKCC\\" + name + "\"" + " /ve " + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}

@@ -1,6 +1,6 @@
 package swsk33.Reg;
 
-public class RegImport { // ´Ó×¢²á±íÎÄ¼þ(regÎÄ¼þ)µ¼Èë×¢²á±í
+public class RegImport { // ä»Žæ³¨å†Œè¡¨æ–‡ä»¶(regæ–‡ä»¶)å¯¼å…¥æ³¨å†Œè¡¨
 	public void importReg(String filepath) throws Exception {
 		String cmd = "cmd /c regedit /s " + "\"" + filepath + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);

@@ -9,7 +9,16 @@
 5，把指定注册表项导出。<br>
 ### 下载地址:[点击进入下载jar包](https://gitee.com/swsk33/RegJ/releases)
 ## 使用方法：
-### 1，先把这个包导入到IDE里面，例如eclipse。不知道如何导入请查看教程：[eclipse导入外部jar包](https://blog.csdn.net/czbqoo01/article/details/72803450)
+### ### 1，添加依赖，有下列两种情况：
+①Eclipse直接添加jar：先下载这个jar包并把这个包导入到IDE里面，例如eclipse。不知道如何导入请查看教程：[eclipse导入外部jar包](https://blog.csdn.net/czbqoo01/article/details/72803450)<br>
+②Maven工程：在项目的配置文件pom.xml中的```<dependencies>```标签里加入下列依赖，此操作无需在上面手动下载jar包（推荐）：<br>
+```
+<dependency>
+    <groupId>com.gitee.swsk33</groupId>
+    <artifactId>RegJ</artifactId>
+    <version>1.0.2</version>
+</dependency>
+```
 ### 2，导入swsk33.Reg下所有类或者需要的类。（import swsk33.Reg.*;）
 ### 3，语法：
 **说在最前：下面语法示例中用了最快捷的方法去执行了某个类中的某个方法。**<br>
@@ -104,4 +113,4 @@
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项,并指定其子项类型为字符串值且值为\and":**<br>
 ```new RegAdd().addHKCR("AAM\\shell\\test","REG_SZ","\\and\\\"");```<br>
 
->最后更新:2020.6.23
+>最后更新:2020.8.19

@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gitee.swsk33</groupId>
 	<artifactId>RegJ</artifactId>
-	<version>1.0.2</version>
+	<version>2.0.0</version>
 	<name>RegJ</name>
 	<packaging>jar</packaging>
 	<description>一个简易的、用java操作注册表的包。可以通过简单的方法对注册表进行操作。</description>
@@ -51,7 +51,29 @@
 	</distributionManagement>
 
 	<build>
+
+		<resources>
+
+			<resource>
+				<directory>${basedir}/src/main/resources</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+				<filtering>false</filtering>
+			</resource>
+
+			<resource>
+				<directory>${basedir}/src/main/java</directory>
+				<includes>
+					<include>**/*.*</include>
+				</includes>
+
+			</resource>
+
+		</resources>
+
 		<plugins>
+
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
@@ -94,7 +116,9 @@
 					</execution>
 				</executions>
 			</plugin>
+
 		</plugins>
+
 	</build>
 
 </project>

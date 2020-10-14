@@ -1,4 +1,4 @@
-package swsk33.Reg;
+package swsk33.reg;
 
 public class RegImport { // 从注册表文件(reg文件)导入注册表
 	public void importReg(String filepath) throws Exception {

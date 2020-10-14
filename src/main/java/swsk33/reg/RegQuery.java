@@ -1,6 +1,7 @@
-package swsk33.Reg;
+package swsk33.reg;
 
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
 
 public class RegQuery {
 	// 查询HKEY_CLASSES_ROOT

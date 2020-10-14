@@ -1,4 +1,4 @@
-package swsk33.Reg;
+package swsk33.reg;
 
 public class RegDelete {
 	// 操作HKEY_CLASSES_ROOT

@@ -268,9 +268,9 @@ public class RegQuery {
 	 * @return boolean 值是否存在
 	 * @throws Exception 权限问题抛出异常
 	 */
-	public boolean isHKCUexists(String name, String objname) throws Exception {
+	public boolean isHKCUexists(String name, String objectName) throws Exception {
 		boolean result = false;
-		String cmd = "cmd /c reg query \"HKCU\\" + name + "\"" + " /v " + "\"" + objname + "\"";
+		String cmd = "cmd /c reg query \"HKCU\\" + name + "\"" + " /v " + "\"" + objectName + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
 		InputStreamReader isr = new InputStreamReader(run.getInputStream());
 		BufferedReader br = new BufferedReader(isr);
@@ -421,9 +421,9 @@ public class RegQuery {
 	 * @return boolean 值是否存在
 	 * @throws Exception 权限问题抛出异常
 	 */
-	public boolean isHKLMexists(String name, String objname) throws Exception {
+	public boolean isHKLMexists(String name, String objectName) throws Exception {
 		boolean result = false;
-		String cmd = "cmd /c reg query \"HKLM\\" + name + "\"" + " /v " + "\"" + objname + "\"";
+		String cmd = "cmd /c reg query \"HKLM\\" + name + "\"" + " /v " + "\"" + objectName + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
 		InputStreamReader isr = new InputStreamReader(run.getInputStream());
 		BufferedReader br = new BufferedReader(isr);
@@ -574,9 +574,9 @@ public class RegQuery {
 	 * @return boolean 值是否存在
 	 * @throws Exception 权限问题抛出异常
 	 */
-	public boolean isHKUexists(String name, String objname) throws Exception {
+	public boolean isHKUexists(String name, String objectName) throws Exception {
 		boolean result = false;
-		String cmd = "cmd /c reg query \"HKU\\" + name + "\"" + " /v " + "\"" + objname + "\"";
+		String cmd = "cmd /c reg query \"HKU\\" + name + "\"" + " /v " + "\"" + objectName + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
 		InputStreamReader isr = new InputStreamReader(run.getInputStream());
 		BufferedReader br = new BufferedReader(isr);
@@ -727,9 +727,9 @@ public class RegQuery {
 	 * @return boolean 值是否存在
 	 * @throws Exception 权限问题抛出异常
 	 */
-	public boolean isHKCCexists(String name, String objname) throws Exception {
+	public boolean isHKCCexists(String name, String objectName) throws Exception {
 		boolean result = false;
-		String cmd = "cmd /c reg query \"HKCC\\" + name + "\"" + " /v " + "\"" + objname + "\"";
+		String cmd = "cmd /c reg query \"HKCC\\" + name + "\"" + " /v " + "\"" + objectName + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
 		InputStreamReader isr = new InputStreamReader(run.getInputStream());
 		BufferedReader br = new BufferedReader(isr);
@@ -775,4 +775,5 @@ public class RegQuery {
 		}
 		return result;
 	}
+
 }

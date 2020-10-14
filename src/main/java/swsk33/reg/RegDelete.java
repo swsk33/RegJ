@@ -182,4 +182,5 @@ public class RegDelete {
 		String cmd = "cmd /c reg delete \"HKCC\\" + name + "\"" + " /ve " + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
+	
 }

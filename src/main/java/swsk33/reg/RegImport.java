@@ -18,4 +18,5 @@ public class RegImport {
 		String cmd = "cmd /c regedit /s " + "\"" + filePath + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
 	}
+	
 }

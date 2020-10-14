@@ -1,5 +1,11 @@
 package swsk33.reg;
 
+/**
+ * 删除注册表
+ * 
+ * @author swsk33
+ *
+ */
 public class RegDelete {
 
 	// 操作HKEY_CLASSES_ROOT

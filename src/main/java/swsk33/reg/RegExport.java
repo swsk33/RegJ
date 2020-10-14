@@ -1,5 +1,11 @@
 package swsk33.reg;
 
+/**
+ * 导出注册表
+ * 
+ * @author swsk33
+ *
+ */
 public class RegExport {
 
 	/**

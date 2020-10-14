@@ -3,6 +3,12 @@ package swsk33.reg;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 
+/**
+ * 查询注册表
+ * 
+ * @author swsk33
+ *
+ */
 public class RegQuery {
 	// 查询HKEY_CLASSES_ROOT
 	public String queryHKCR(String name) throws Exception { // 查询HKEY_CLASSES_ROOT下的某项及其所有子项的名称、类型和值

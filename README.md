@@ -16,40 +16,61 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>reg-java</artifactId>
-    <version>2.0.0</version>
+    <version>3.0.0</version>
 </dependency>
 ```
 ### 2，导入swsk33.reg下所有类或者需要的类。（import swsk33.reg.*;）
-### 3，语法：
-**说在最前：下面语法示例中用了最快捷的方法去执行了某个类中的某个方法。**<br>
-**实际上这两种方式执行效果相同：**<br>
-**方式一：**<br>
-```A a=new A();```<br>
-```a.af();```<br>
-**方式二:**<br>
-```new A().af();```<br>
-**上述方式一、二效果相同，都是执行了A类里的af方法。只是方法一先生成了对象。下面示例基本上用方法二进行演示。**<br>
-------------------------------------------------------------------------------------------------------------------------------
-#### (1)添加注册表项：
-##### 这里以向HKEY_CLASSES_ROOT里面添加项为例。
+### 3，公共类与方法：
+#### 类*RegAdd*：用于添加注册表项，其包含的方法：
+1. boolean add(String primaryKey, String name)
+2. boolean add(String primaryKey, String name, String data)
+3. boolean add(String primaryKey, String name, String type, String data)
+4. boolean add(String primaryKey, String name, String type, String objectName, String data)
 
-添加一个空的项到HKEY_CLASSES_ROOT中:<br>
-```new RegAdd().addHKCR(项名称);```<br>
-添加一个项到HKEY_CLASSES_ROOT中并指定其默认值的值:<br>
-```new RegAdd().addHKCR(项名称, 数据值);```<br>
-添加一个项到HKEY_CLASSES_ROOT中并指定其子项的类型和值:<br>
-```new RegAdd().addHKCR(项名称, 其子项类型, 子项值);```<br>
-添加一个项到HKEY_CLASSES_ROOT中并指定其子项的名称、类型和值:<br>
-```new RegAdd().addHKCR(项名称, 子项类型, 子项名称, 子项值);```<br>
+**1：在注册表里面添加空项**
+* 参数：
+ + primaryKey 要操作的注册表主键
+ + name 项名称
+* 返回值：boolean 添加成功返回true
 
-**这里类型常量对应如下:**<br>
-```RegAdd.REG_SZ```:字符串值<br>
-```RegAdd.REG_MULTI_SZ```:多字符串值<br>
-```RegAdd.REG_EXPAND_SZ```:可扩展字符串值<br>
-```RegAdd.REG_DWORD```:DWORD值<br>
-```RegAdd.REG_QWORD```:QWORD值<br>
-```RegAdd.REG_BINARY```:二进制值<br>
-```RegAdd.REG_NONE```:无<br>
+**2：在注册表里面添加项并指定其默认项的值，字符串值类型**
+* 参数：
+ + primaryKey 要操作的注册表主键
+ + name 项名称
+ + data 指定默认项的值
+* 返回值：boolean 添加成功返回true
+
+**3：在注册表里面添加项并指定其默认值的类型和值**
+* 参数：
+ + primaryKey 要操作的注册表主键
+ + name 项名称
+ + type 默认值的类型
+ + data 默认值的值
+* 返回值：boolean 添加成功返回true
+
+**4：在注册表里面添加项并指定项中值的类型、名称和值（若该项已存在，则会在该项中添加值）**
+* 参数：
+ + primaryKey 要操作的注册表主键
+ + name 项名称
+ + type 值的类型
+ + objectName 值的名称
+ + data 值的值
+* 返回值：boolean 添加成功返回true
+
+**上述type（值的类型）参数可选常量对应如下:**<br>
+```RegDataType.REG_SZ```:字符串值<br>
+```RegDataType.REG_MULTI_SZ```:多字符串值<br>
+```RegDataType.REG_EXPAND_SZ```:可扩展字符串值<br>
+```RegDataType.REG_DWORD```:DWORD值<br>
+```RegDataType.REG_QWORD```:QWORD值<br>
+```RegDataType.REG_BINARY```:二进制值<br>
+```RegDataType.REG_NONE```:无<br>
+**上述primaryKey（注册表主键）参数可选常量对应如下**
+RegPrimaryKey.HKCR:```HKEY_CLASSES_ROOT```<br>
+RegPrimaryKey.HKCU:```HKEY_CURRENT_USER```<br>
+RegPrimaryKey.HKLM:```HKEY_LOCAL_MACHINE```<br>
+RegPrimaryKey.HKU:```HKEY_USERS```<br>
+RegPrimaryKey.HKCC:```HKEY_CURRENT_CONFIG```<br>
 
 
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项:**<br>
@@ -58,59 +79,21 @@
 ```new RegAdd().addHKCR("AAM\\shell\\test", RegAdd.REG_SZ, "2333");```<br>
 
 **注意：如果指定注册表存在，添加操作会将其覆盖！**<br>
-#### (2)删除注册表项：
-##### 这里以删除HKEY_CLASSES_ROOT里面的项为例。
 
-删除HKEY_CLASSES_ROOT里面某一项及其所有子项:<br>
-```new RegDelete().delHKCR(项名称);```<br>
-删除HKEY_CLASSES_ROOT里面某项的某个子项:<br>
-```new RegDelete().delHKCR(项名称, 子项名称);```<br>
-删除HKEY_CLASSES_ROOT里面某项的默认值:<br>
-```new RegDelete().delHKCRve(项名称);```<br>
 
-#### (3)查询注册表项(返回值String)：
-##### 这里以查询HKEY_CLASSES_ROOT里面的项为例。
 
-查询HKEY_CLASSES_ROOT下的某项及其所有子项的名称、类型和值:<br>
-```new RegQuery().queryHKCR(项名称);```<br>
-查询HKEY_CLASSES_ROOT下的某项的子项的信息:<br>
-```new RegQuery().queryHKCR(项名称, 子项名称);```<br>
-查询HKEY_CLASSES_ROOT下的某项的默认子项信息:<br>
-```new RegQuery().queryHKCRve(项名称);```<br>
-判断HKEY_CLASSES_ROOT下的某一项是否存在:<br>
-```new RegQuery().isHKCRexists(项名称);```<br>
-判断HKEY_CLASSES_ROOT下的某一项的子项是否存在:<br>
-```new RegQuery().isHKCRexists(项名称, 子项名称);```<br>
-判断HKEY_CLASSES_ROOT下的某一项的默认值是有内容（不为空）:<br>
-```new RegQuery().isHKCRexistsve(项名称);```<br>
 
-#### (4)导出注册表项为reg文件：
-##### 这里以导出HKEY_CLASSES_ROOT里面的项为例。
-
-导出HKEY_CLASSES_ROOT里面的某一项:<br>
-```new RegExport().exportHKCR(项名称, 导出文件路径);```<br>
 
 **例如把HKEY_CLASSES_ROOT里的AAM\shell导出到E盘，保存为exp.reg:**<br>
 ```new RegExport().exportHKCR("AAM\\shell", "E:\\exp.reg");```<br>
 
-### 好的，以上添加、删除、查询和导出这四个操作都是以操作HKEY_CLASSES_ROOT这一基层类别键为例。如要操作其它键，把上面所有语句的方法名里面的键的简写（HKCR）换成其它键简写即可。
-简写对应如下:<br>
-```HKEY_CLASSES_ROOT```:HKCR<br>
-```HKEY_CURRENT_USER```:HKCU<br>
-```HKEY_LOCAL_MACHINE```:HKLM<br>
-```HKEY_USERS```:HKU<br>
-```HKEY_CURRENT_CONFIG```:HKCC<br>
-
 **例如把HKEY_CURRENT_CONFIG里的Software\Fonts导出到E盘，保存为exp.reg:**
 ```new RegExport().exportHKCC("Software\\Fonts", "E:\\exp.reg");```<br>
 
-#### (5)从reg文件导入注册表项：
-
-```new RegImport().importReg(reg文件路径)```<br>
 
 **注意！若某项的值里面有"（双引号），请在方法参数中用\\\\\\"（三反斜杠加一个双引号）代替！单引号相同。**<br>
 **若有\（反斜杠）,则用\\\\（两个反斜杠）代替！**<br>
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项,并指定其子项类型为字符串值且值为\and":**<br>
 ```new RegAdd().addHKCR("AAM\\shell\\test","REG_SZ","\\and\\\"");```<br>
 
->最后更新:2020.10.14
+>最后更新:2020.10.18

@@ -143,7 +143,7 @@ import swsk33.reg.utils.*;
 		- name       判断项的名称
 	+ 返回值：boolean 默认值是否存在
 
-**上述type（值的类型）参数可选常量对应如下:**<br>
+**上述type（值的类型）参数可选常量对应如下：**<br>
 ```RegDataType.REG_SZ```:字符串值<br>
 ```RegDataType.REG_MULTI_SZ```:多字符串值<br>
 ```RegDataType.REG_EXPAND_SZ```:可扩展字符串值<br>
@@ -151,7 +151,7 @@ import swsk33.reg.utils.*;
 ```RegDataType.REG_QWORD```:QWORD值<br>
 ```RegDataType.REG_BINARY```:二进制值<br>
 ```RegDataType.REG_NONE```:无<br>
-**上述primaryKey（注册表主键）参数可选常量对应如下**<br>
+**上述primaryKey（注册表主键）参数可选常量对应如下：**<br>
 RegPrimaryKey.HKCR:```HKEY_CLASSES_ROOT```<br>
 RegPrimaryKey.HKCU:```HKEY_CURRENT_USER```<br>
 RegPrimaryKey.HKLM:```HKEY_LOCAL_MACHINE```<br>

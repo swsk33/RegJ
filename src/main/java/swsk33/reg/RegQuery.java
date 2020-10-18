@@ -59,7 +59,7 @@ public class RegQuery {
 	}
 
 	/**
-	 * 查询注册表下的某项的默认值信息
+	 * 查询注册表下的某项的默认值的信息
 	 * 
 	 * @param primaryKey 要操作的主键名
 	 * @param name       查询项的名称

@@ -145,7 +145,7 @@ public class RegQuery {
 	 * 
 	 * @param primaryKey 要操作的主键名
 	 * @param name       判断项的名称
-	 * @return 项是否存在
+	 * @return boolean 默认值是否存在
 	 * @throws Exception 权限问题抛出异常
 	 */
 	public boolean isRegDefaultExists(String primaryKey, String name) throws Exception {
@@ -161,7 +161,7 @@ public class RegQuery {
 			cdr = br.readLine();
 		}
 		br.close();
-		if (res.contains("数值未设置") || res.equals("")) {
+		if (res.contains("数值未设置") || res.contains("��ֵδ����") || res.equals("")) {
 			result = false;
 		} else {
 			result = true;

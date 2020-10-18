@@ -10,14 +10,10 @@ public class MainTest {
 		RegExport re = new RegExport();
 		RegImport ri = new RegImport();
 		RegQuery rq = new RegQuery();
-		// ra.add(RegPrimaryKey.HKCR, "swsk33Test", RegDataType.REG_MULTI_SZ, "val",
-		// "默认值mul");
-		// rd.del(RegPrimaryKey.HKCR, "swsk33Test");
-		// re.export(RegPrimaryKey.HKCR, "*", "E:\\a.reg");
-		// ri.importReg("E:\\hbx.reg");
-		String s = rq.query(RegPrimaryKey.HKCR, "*\\shell\\HBuilderX", "icon");
-		System.out.println(s);
-		
+		boolean a = rd.del(RegPrimaryKey.HKCR, "swsk33Test");
+		System.out.println(a);
+		//String s = rq.queryDefaultValue(RegPrimaryKey.HKCR, "swsk33Test");
+		//System.out.println(s);
 	}
 
 }

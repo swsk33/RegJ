@@ -22,6 +22,7 @@ public class RegDelete {
 		boolean success = false;
 		String cmd = "cmd /c reg delete \"" + primaryKey + name + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
+		run.waitFor();
 		if (!query.isRegExists(primaryKey, name)) {
 			success = true;
 		}
@@ -41,6 +42,7 @@ public class RegDelete {
 		boolean success = false;
 		String cmd = "cmd /c reg delete \"" + primaryKey + name + "\"" + " /v " + "\"" + objectName + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
+		run.waitFor();
 		if (!query.isRegExists(primaryKey, name, objectName)) {
 			success = true;
 		}
@@ -59,6 +61,7 @@ public class RegDelete {
 		boolean success = false;
 		String cmd = "cmd /c reg delete \"" + primaryKey + name + "\"" + " /ve " + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
+		run.waitFor();
 		if (!query.isRegDefaultExists(primaryKey, name)) {
 			success = true;
 		}

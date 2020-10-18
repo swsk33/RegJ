@@ -24,6 +24,7 @@ public class RegAdd {
 		boolean success = false;
 		String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
+		run.waitFor();
 		if (query.isRegExists(primaryKey, name)) {
 			success = true;
 		}
@@ -43,6 +44,7 @@ public class RegAdd {
 		boolean success = false;
 		String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /d " + "\"" + data + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
+		run.waitFor();
 		if (query.queryDefaultValue(primaryKey, name).contains(data)) {
 			success = true;
 		}
@@ -68,6 +70,7 @@ public class RegAdd {
 			String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /t " + "\"" + type + "\"" + " /d " + "\""
 					+ data + "\"" + " /f";
 			Process run = Runtime.getRuntime().exec(cmd);
+			run.waitFor();
 			if (query.queryDefaultValue(primaryKey, name).contains(data)
 					&& query.queryDefaultValue(primaryKey, name).contains(type)) {
 				success = true;
@@ -98,6 +101,7 @@ public class RegAdd {
 			String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /t " + "\"" + type + "\"" + " /v " + "\""
 					+ objectName + "\"" + " /d " + "\"" + data + "\"" + " /f";
 			Process run = Runtime.getRuntime().exec(cmd);
+			run.waitFor();
 			if (query.query(primaryKey, name, objectName).contains(data)
 					&& query.query(primaryKey, name, objectName).contains(type)) {
 				success = true;

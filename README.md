@@ -19,41 +19,45 @@
     <version>3.0.0</version>
 </dependency>
 ```
-### 2，导入swsk33.reg下所有类或者需要的类。（import swsk33.reg.*;）
+### 2，导入swsk33.reg、swsk33.reg.utils下所有类或者需要的类。
+```
+import swsk33.reg.*;
+import swsk33.reg.utils.*;
+```
 ### 3，公共类与方法：
 #### 类*RegAdd*：用于添加注册表项，其包含的方法：
 * boolean add(String primaryKey, String name)
 	+ 作用：在注册表里面添加空项
 	+ 参数：
 		- primaryKey 要操作的注册表主键
-		- name 项名称
+		- name       项名称
 	+ 返回值：boolean 添加成功返回true
 
 * boolean add(String primaryKey, String name, String data)
 	+ 作用：在注册表里面添加项并指定其默认项的值，字符串值类型
 	+ 参数：
 		- primaryKey 要操作的注册表主键
-		- name 项名称
-		- data 指定默认项的值
+		- name       项名称
+		- data       指定默认项的值
 	+ 返回值：boolean 添加成功返回true
 
 * boolean add(String primaryKey, String name, String type, String data)
 	+ 作用：在注册表里面添加项并指定其默认值的类型和值
 	+ 参数：
 		- primaryKey 要操作的注册表主键
-		- name 项名称
-		- type 默认值的类型
-		- data 默认值的值
+		- name       项名称
+		- type       默认值的类型
+		- data       默认值的值
 	+ 返回值：boolean 添加成功返回true
 
 * boolean add(String primaryKey, String name, String type, String objectName, String data)
 	+ 作用：在注册表里面添加项并指定项中值的类型、名称和值（若该项已存在，则会在该项中添加值）
 	+ 参数：
 		- primaryKey 要操作的注册表主键
-		- name 项名称
-		- type 值的类型
+		- name       项名称
+		- type       值的类型
 		- objectName 值的名称
-		- data 值的值
+		- data       值的值
 	+ 返回值：boolean 添加成功返回true
 
 #### 类*RegDelete*：用于删除注册表项，其包含的方法：
@@ -61,14 +65,14 @@
 	+ 作用：删除注册表里面的某项及其所有子项
 	+ 参数：
 		- primaryKey 要操作的主键名
-		- name 要删除的项的名称
+		- name       要删除的项的名称
 	+ 返回值：boolean 删除成功返回true
 
 * boolean del(String primaryKey, String name, String objectName)
 	+ 作用：删除注册表里面的某项的某个值
 	+ 参数：
 		- primaryKey 要操作的主键名
-		- name 项的名称
+		- name       项的名称
 		- objectName 要删除的值的名称
 	+ 返回值：boolean 删除成功返回true
 
@@ -76,7 +80,7 @@
 	+ 作用：删除（清空）注册表里面的某项的默认值
 	+ 参数：
 		- primaryKey 要操作的主键名
-		- name 项的名称
+		- name       项的名称
 	+ 返回值：boolean 删除成功返回true
 
 #### 类*RegExport*：用于导出注册表项为reg文件，其包含的方法：
@@ -100,7 +104,7 @@
 	+ 参数：
 		- primaryKey 要操作的主键名
 		- name       查询的项名称
-	+ 返回值：String 查询结果
+	+ 返回值：String  查询结果
 
 * String query(String primaryKey, String name, String objectName)
 	+ 作用：查询注册表下的某项的值的信息
@@ -108,14 +112,14 @@
 		- primaryKey 要操作的主键名
 		- name       查询的项名称
 		- objectName 待查询的值的名字
-	+ 返回值：String 查询结果
+	+ 返回值：String  查询结果
 
 * String queryDefaultValue(String primaryKey, String name)
 	+ 作用：查询注册表下的某项的默认值的信息
 	+ 参数：
 		- primaryKey 要操作的主键名
 		- name       查询项的名称
-	+ 返回值：String 查询结果
+	+ 返回值：String  查询结果
 
 * boolean isRegExists(String primaryKey, String name)
 	+ 作用：判断注册表下的某一项是否存在

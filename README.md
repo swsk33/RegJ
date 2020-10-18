@@ -151,7 +151,7 @@ import swsk33.reg.utils.*;
 ```RegDataType.REG_QWORD```:QWORD值<br>
 ```RegDataType.REG_BINARY```:二进制值<br>
 ```RegDataType.REG_NONE```:无<br>
-**上述primaryKey（注册表主键）参数可选常量对应如下**
+**上述primaryKey（注册表主键）参数可选常量对应如下**<br>
 RegPrimaryKey.HKCR:```HKEY_CLASSES_ROOT```<br>
 RegPrimaryKey.HKCU:```HKEY_CURRENT_USER```<br>
 RegPrimaryKey.HKLM:```HKEY_LOCAL_MACHINE```<br>

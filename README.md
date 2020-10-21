@@ -16,7 +16,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>reg-java</artifactId>
-    <version>3.0.0</version>
+    <version>3.0.1</version>
 </dependency>
 ```
 ### 2，导入swsk33.reg、swsk33.reg.utils下所有类或者需要的类。

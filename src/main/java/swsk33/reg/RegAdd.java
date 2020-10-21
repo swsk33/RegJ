@@ -13,6 +13,19 @@ public class RegAdd {
 	private RegQuery query = new RegQuery();
 
 	/**
+	 * 处理注册表值字符串的方法。
+	 * 一般注册表值的双百分号（例如%Path%）会被识别成变量并直接代值，而我们想单纯地插入%Path%，用^%可以插入百分号。但如果用双引号括起来，^号也会被一起插入。因此这个方法用于把%变成"^%"，那么字符串值"C:\\Program
+	 * Files;%Path%"会变成"C:\\Program Files;"^%"Path"^%""，即可把变量原封不动地插入。
+	 * 
+	 * @param origin 传入字符串
+	 * @return 字符串
+	 */
+	private String stringProcessing(String origin) {
+		origin = origin.replace("%", "\"^%\"");
+		return origin;
+	}
+
+	/**
 	 * 在注册表里面添加空项
 	 * 
 	 * @param primaryKey 要操作的注册表主键
@@ -23,7 +36,7 @@ public class RegAdd {
 	public boolean add(String primaryKey, String name) throws Exception {
 		boolean success = false;
 		String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /f";
-		Process run = Runtime.getRuntime().exec(cmd);
+		Process run = Runtime.getRuntime().exec(this.stringProcessing(cmd));
 		run.waitFor();
 		if (query.isRegExists(primaryKey, name)) {
 			success = true;
@@ -43,7 +56,7 @@ public class RegAdd {
 	public boolean add(String primaryKey, String name, String data) throws Exception {
 		boolean success = false;
 		String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /d " + "\"" + data + "\"" + " /f";
-		Process run = Runtime.getRuntime().exec(cmd);
+		Process run = Runtime.getRuntime().exec(this.stringProcessing(cmd));
 		run.waitFor();
 		if (query.queryDefaultValue(primaryKey, name).contains(data)) {
 			success = true;
@@ -69,7 +82,7 @@ public class RegAdd {
 				|| type.equalsIgnoreCase("REG_NONE")) {
 			String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /t " + "\"" + type + "\"" + " /d " + "\""
 					+ data + "\"" + " /f";
-			Process run = Runtime.getRuntime().exec(cmd);
+			Process run = Runtime.getRuntime().exec(this.stringProcessing(cmd));
 			run.waitFor();
 			if (query.queryDefaultValue(primaryKey, name).contains(data)
 					&& query.queryDefaultValue(primaryKey, name).contains(type)) {
@@ -100,7 +113,7 @@ public class RegAdd {
 				|| type.equalsIgnoreCase("REG_NONE")) {
 			String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /t " + "\"" + type + "\"" + " /v " + "\""
 					+ objectName + "\"" + " /d " + "\"" + data + "\"" + " /f";
-			Process run = Runtime.getRuntime().exec(cmd);
+			Process run = Runtime.getRuntime().exec(this.stringProcessing(cmd));
 			run.waitFor();
 			if (query.query(primaryKey, name, objectName).contains(data)
 					&& query.query(primaryKey, name, objectName).contains(type)) {

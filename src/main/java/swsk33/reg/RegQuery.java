@@ -2,6 +2,8 @@ package swsk33.reg;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * 查询注册表
@@ -55,6 +57,25 @@ public class RegQuery {
 			cdr = br.readLine();
 		}
 		br.close();
+		return result;
+	}
+
+	/**
+	 * 精确查询注册表的值，查询注册表某一项的值及其子项的值
+	 * 
+	 * @param primaryKey 要查询的注册表主键
+	 * @param name       要查询的项名称
+	 * @return Map<String, String> 查询的注册表项与值，Map对象的键是注册表项名，值就是这一项对应的值
+	 * @throws Exception 权限问题抛出异常
+	 */
+	public Map<String, String> queryValue(String primaryKey, String name) throws Exception {
+		Map<String, String> result = new HashMap<String, String>();
+		String[] regValue = this.query(primaryKey, name).substring(2).split("\r\n\r\n");
+		for (String eachValue : regValue) {
+			String key = eachValue.substring(0, eachValue.indexOf("\r\n"));
+			String value = eachValue.substring(eachValue.lastIndexOf("    "));
+			result.put(key, value);
+		}
 		return result;
 	}
 

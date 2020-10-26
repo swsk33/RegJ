@@ -4,7 +4,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.gitee.swsk33</groupId>
 	<artifactId>reg-java</artifactId>
-	<version>3.0.1</version>
+	<version>3.3.1</version>
 	<name>RegJ</name>
 	<packaging>jar</packaging>
 	<description>一个简易的、用java操作注册表的包。可以通过简单的方法对注册表进行操作。</description>

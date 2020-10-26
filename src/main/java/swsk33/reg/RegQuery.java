@@ -65,7 +65,7 @@ public class RegQuery {
 	 * 
 	 * @param primaryKey 要查询的注册表主键
 	 * @param name       要查询的项名称
-	 * @return Map<String, String> 查询的注册表项与值，Map对象的键是注册表项名，值就是这一项对应的值
+	 * @return Map&lt;String, String&gt; 查询的注册表项与值，Map对象的键是注册表项名，值就是这一项对应的值
 	 * @throws Exception 权限问题抛出异常
 	 */
 	public Map<String, String> queryValue(String primaryKey, String name) throws Exception {

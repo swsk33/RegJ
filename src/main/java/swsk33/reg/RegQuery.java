@@ -3,6 +3,7 @@ package swsk33.reg;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.util.HashMap;
+import java.util.Locale;
 import java.util.Map;
 
 /**
@@ -12,6 +13,25 @@ import java.util.Map;
  *
  */
 public class RegQuery {
+
+	private String charSet = "UTF-8";
+
+	private String getCharSet() {
+		return charSet;
+	}
+
+	private void setCharSet(String charSet) {
+		this.charSet = charSet;
+	}
+
+	public RegQuery() {
+		Locale locale = Locale.getDefault();
+		if (locale.getLanguage().equals("zh")) {
+			setCharSet("GBK");
+		} else {
+			setCharSet("UTF-8");
+		}
+	}
 
 	/**
 	 * 查询注册表下的某项及其所有值的名称、类型和值
@@ -25,7 +45,7 @@ public class RegQuery {
 		String result = "";
 		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /s";
 		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream());
+		InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
 		BufferedReader br = new BufferedReader(isr);
 		String cdr = br.readLine();
 		while (cdr != null) {
@@ -49,7 +69,7 @@ public class RegQuery {
 		String result = "";
 		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /v " + "\"" + objectName + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream());
+		InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
 		BufferedReader br = new BufferedReader(isr);
 		String cdr = br.readLine();
 		while (cdr != null) {
@@ -65,18 +85,32 @@ public class RegQuery {
 	 * 
 	 * @param primaryKey 要查询的注册表主键
 	 * @param name       要查询的项名称
-	 * @return Map&lt;String, String&gt; 查询的注册表项与值，Map对象的键是注册表项名，值就是这一项对应的值
+	 * @return Map&lt;String, Map&lt;String, String&gt;&gt; 查询的注册表项与值，Map对象的键是注册表项名，值就是这一项对应的值
 	 * @throws Exception 权限问题抛出异常
 	 */
-	public Map<String, String> queryValue(String primaryKey, String name) throws Exception {
-		Map<String, String> result = new HashMap<String, String>();
+	public Map<String, Map<String, String>> queryValue(String primaryKey, String name) throws Exception {
+		Map<String, Map<String, String>> result = new HashMap<String, Map<String, String>>();
 		String[] regValue = this.query(primaryKey, name).substring(2).split("\r\n\r\n");
 		for (String eachValue : regValue) {
 			String key = eachValue.substring(0, eachValue.indexOf("\r\n"));
-			String value = eachValue.substring(eachValue.lastIndexOf("    "));
-			result.put(key, value);
+			String value = eachValue.substring(eachValue.lastIndexOf("    ") + 4);
+			
 		}
 		return result;
+	}
+
+	/**
+	 * 精确查询注册表的值，查询注册表某一项之下的值的值
+	 * 
+	 * @param primaryKey 要查询的注册表主键
+	 * @param name       要查询的项名称
+	 * @param objectName 待查询的值的名字
+	 * @return String 查询的结果
+	 * @throws Exception 权限问题抛出异常
+	 */
+	public String queryValue(String primaryKey, String name, String objectName) throws Exception {
+		String queryValue = this.query(primaryKey, name, objectName);
+		return queryValue.substring(queryValue.lastIndexOf("    ") + 4, queryValue.length() - 4);
 	}
 
 	/**
@@ -91,7 +125,7 @@ public class RegQuery {
 		String result = "";
 		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream());
+		InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
 		BufferedReader br = new BufferedReader(isr);
 		String cdr = br.readLine();
 		while (cdr != null) {
@@ -114,7 +148,7 @@ public class RegQuery {
 		boolean result = false;
 		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream());
+		InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
 		BufferedReader br = new BufferedReader(isr);
 		String cdr = br.readLine();
 		String res = "";
@@ -144,7 +178,7 @@ public class RegQuery {
 		boolean result = false;
 		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /v " + "\"" + objectName + "\"";
 		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream());
+		InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
 		BufferedReader br = new BufferedReader(isr);
 		String cdr = br.readLine();
 		String res = "";
@@ -173,7 +207,7 @@ public class RegQuery {
 		boolean result = false;
 		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream());
+		InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
 		BufferedReader br = new BufferedReader(isr);
 		String cdr = br.readLine();
 		String res = "";
@@ -182,7 +216,7 @@ public class RegQuery {
 			cdr = br.readLine();
 		}
 		br.close();
-		if (res.contains("数值未设置") || res.contains("��ֵδ����") || res.equals("")) {
+		if (res.contains("数值未设置") || res.equals("")) {
 			result = false;
 		} else {
 			result = true;

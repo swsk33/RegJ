@@ -16,7 +16,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>reg-java</artifactId>
-    <version>3.0.1</version>
+    <version>3.3.7</version>
 </dependency>
 ```
 ### 2，导入swsk33.reg、swsk33.reg.utils下所有类或者需要的类。
@@ -102,36 +102,58 @@ import swsk33.reg.utils.*;
 * String query(String primaryKey, String name)
 	+ 作用：查询注册表下的某项及其所有值的名称、类型和值
 	+ 参数：
-		- primaryKey 要操作的主键名
+		- primaryKey 要查询的主键名
 		- name       查询的项名称
 	+ 返回值：String  查询结果
 
 * String query(String primaryKey, String name, String objectName)
 	+ 作用：查询注册表下的某项的值的信息
 	+ 参数：
-		- primaryKey 要操作的主键名
+		- primaryKey 要查询的主键名
 		- name       查询的项名称
 		- objectName 待查询的值的名字
 	+ 返回值：String  查询结果
 
-* String queryDefaultValue(String primaryKey, String name)
+* Map<String, Map<String, String>> queryValue(String primaryKey, String name)
+	+ 作用：精确查询注册表的值，查询注册表某一项的值及其子项的值
+	+ 参数：
+		- primaryKey 要查询的注册表主键
+		- name       要查询的项名称
+	+ 返回值：Map<String, Map<String, String>>查询的注册表项与值，Map对象的键是注册表项名，值也是一个Map对象，为该项下所有值的集合，这个Map对象中键是注册表该项之下的值的名称，值即为对应值
+
+* String queryValue(String primaryKey, String name, String objectName)
+	+ 作用：精确查询注册表的值，查询注册表某一项之下的值的值
+	+ 参数：
+		- primaryKey 要查询的注册表主键
+		- name       要查询的项名称
+		- objectName 待查询的值的名字
+	+ 返回值：String 查询的结果
+
+* String queryDefault(String primaryKey, String name)
 	+ 作用：查询注册表下的某项的默认值的信息
 	+ 参数：
-		- primaryKey 要操作的主键名
+		- primaryKey 要查询的主键名
 		- name       查询项的名称
 	+ 返回值：String  查询结果
+
+* String queryDefaultValue(String primaryKey, String name)
+	+ 作用：精确查询注册表的值，查询注册表某一项默认值的值
+	+ 参数：
+		- primaryKey 要查询的主键名
+		- name       查询项的名称
+	+ 返回值：String 查询结果
 
 * boolean isRegExists(String primaryKey, String name)
 	+ 作用：判断注册表下的某一项是否存在
 	+ 参数：
-		- primaryKey 要操作的主键名
+		- primaryKey 要查询的主键名
 		- name       判断项的名称
 	+ 返回值：boolean 项是否存在
 
 * boolean isRegExists(String primaryKey, String name, String objectName)
 	+ 作用：判断注册表下的某一项的值是否存在
 	+ 参数：
-		- primaryKey 要操作的主键名
+		- primaryKey 要查询的主键名
 		- name       判断项的名称
 		- objectName 判断的值的名称
 	+ 返回值：boolean 值是否存在
@@ -139,7 +161,7 @@ import swsk33.reg.utils.*;
 * boolean isRegDefaultExists(String primaryKey, String name)
 	+ 作用：判断注册表下的某一项的默认值是有内容（不为空）
 	+ 参数：
-		- primaryKey 要操作的主键名
+		- primaryKey 要查询的主键名
 		- name       判断项的名称
 	+ 返回值：boolean 默认值是否存在
 
@@ -173,4 +195,4 @@ RegPrimaryKey.HKCC:```HKEY_CURRENT_CONFIG```<br>
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项,并指定其子项类型为字符串值且值为\and":**<br>
 ```new RegAdd().add(RegPrimaryKey.HKCR, "AAM\\shell\\test","REG_SZ","\\and\\\"");```<br>
 
->最后更新:2020.10.18
+>最后更新:2020.10.27

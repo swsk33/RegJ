@@ -85,16 +85,25 @@ public class RegQuery {
 	 * 
 	 * @param primaryKey 要查询的注册表主键
 	 * @param name       要查询的项名称
-	 * @return Map&lt;String, Map&lt;String, String&gt;&gt; 查询的注册表项与值，Map对象的键是注册表项名，值就是这一项对应的值
+	 * @return Map&lt;String, Map&lt;String, String&gt;&gt;
+	 *         查询的注册表项与值，Map对象的键是注册表项名，值就是这一项对应的值
 	 * @throws Exception 权限问题抛出异常
 	 */
 	public Map<String, Map<String, String>> queryValue(String primaryKey, String name) throws Exception {
 		Map<String, Map<String, String>> result = new HashMap<String, Map<String, String>>();
-		String[] regValue = this.query(primaryKey, name).substring(2).split("\r\n\r\n");
+		String queryValue = this.query(primaryKey, name);
+		String[] regValue = queryValue.substring(2, queryValue.length() - 4).split("\r\n\r\n");
 		for (String eachValue : regValue) {
 			String key = eachValue.substring(0, eachValue.indexOf("\r\n"));
-			String value = eachValue.substring(eachValue.lastIndexOf("    ") + 4);
-			
+			String[] values = eachValue.substring(eachValue.indexOf("\r\n") + 1).split("\r\n");
+			Map<String, String> kvs = new HashMap<String, String>();
+			for (String valueOrigin : values) {
+				valueOrigin = valueOrigin.substring(4);
+				String keyName = valueOrigin.substring(0, valueOrigin.indexOf("    "));
+				String value = valueOrigin.substring(valueOrigin.lastIndexOf("    ") + 4);
+				kvs.put(keyName, value);
+			}
+			result.put(key, kvs);
 		}
 		return result;
 	}

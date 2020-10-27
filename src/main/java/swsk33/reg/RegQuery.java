@@ -36,7 +36,7 @@ public class RegQuery {
 	/**
 	 * 查询注册表下的某项及其所有值的名称、类型和值
 	 * 
-	 * @param primaryKey 要操作的主键名
+	 * @param primaryKey 要查询的主键名
 	 * @param name       查询的项名称
 	 * @return String 查询结果
 	 * @throws Exception 权限问题抛出异常
@@ -59,7 +59,7 @@ public class RegQuery {
 	/**
 	 * 查询注册表下的某项的值的信息
 	 * 
-	 * @param primaryKey 要操作的主键名
+	 * @param primaryKey 要查询的主键名
 	 * @param name       查询的项名称
 	 * @param objectName 待查询的值的名字
 	 * @return String 查询结果
@@ -125,12 +125,12 @@ public class RegQuery {
 	/**
 	 * 查询注册表下的某项的默认值的信息
 	 * 
-	 * @param primaryKey 要操作的主键名
+	 * @param primaryKey 要查询的主键名
 	 * @param name       查询项的名称
 	 * @return String 查询结果
 	 * @throws Exception 权限问题抛出异常
 	 */
-	public String queryDefaultValue(String primaryKey, String name) throws Exception {
+	public String queryDefault(String primaryKey, String name) throws Exception {
 		String result = "";
 		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(cmd);
@@ -146,9 +146,22 @@ public class RegQuery {
 	}
 
 	/**
+	 * 精确查询注册表的值，查询注册表某一项默认值的值
+	 * 
+	 * @param primaryKey 要查询的主键名
+	 * @param name       查询项的名称
+	 * @return String 查询结果
+	 * @throws Exception 权限问题抛出异常
+	 */
+	public String queryDefaultValue(String primaryKey, String name) throws Exception {
+		String result = this.queryDefault(primaryKey, name);
+		return result.substring(result.lastIndexOf("    ") + 4, result.length() - 4);
+	}
+
+	/**
 	 * 判断注册表下的某一项是否存在
 	 * 
-	 * @param primaryKey 要操作的主键名
+	 * @param primaryKey 要查询的主键名
 	 * @param name       判断项的名称
 	 * @return boolean 项是否存在
 	 * @throws Exception 权限问题抛出异常
@@ -177,7 +190,7 @@ public class RegQuery {
 	/**
 	 * 判断注册表下的某一项的值是否存在
 	 * 
-	 * @param primaryKey 要操作的主键名
+	 * @param primaryKey 要查询的主键名
 	 * @param name       判断项的名称
 	 * @param objectName 判断的值的名称
 	 * @return boolean 值是否存在
@@ -207,7 +220,7 @@ public class RegQuery {
 	/**
 	 * 判断注册表下的某一项的默认值是有内容（不为空）
 	 * 
-	 * @param primaryKey 要操作的主键名
+	 * @param primaryKey 要查询的主键名
 	 * @param name       判断项的名称
 	 * @return boolean 默认值是否存在
 	 * @throws Exception 权限问题抛出异常

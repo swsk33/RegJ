@@ -58,7 +58,7 @@ public class RegAdd {
 		String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /d " + "\"" + data + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(this.stringProcessing(cmd));
 		run.waitFor();
-		if (query.queryDefaultValue(primaryKey, name).contains(data)) {
+		if (query.queryDefault(primaryKey, name).contains(data)) {
 			success = true;
 		}
 		return success;
@@ -84,8 +84,8 @@ public class RegAdd {
 					+ data + "\"" + " /f";
 			Process run = Runtime.getRuntime().exec(this.stringProcessing(cmd));
 			run.waitFor();
-			if (query.queryDefaultValue(primaryKey, name).contains(data)
-					&& query.queryDefaultValue(primaryKey, name).contains(type)) {
+			if (query.queryDefault(primaryKey, name).contains(data)
+					&& query.queryDefault(primaryKey, name).contains(type)) {
 				success = true;
 			}
 		} else {

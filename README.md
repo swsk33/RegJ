@@ -16,7 +16,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>reg-java</artifactId>
-    <version>3.3.7-halloween</version>
+    <version>3.3.10</version>
 </dependency>
 ```
 ### 2，导入swsk33.reg、swsk33.reg.utils下所有类或者需要的类。
@@ -195,4 +195,4 @@ RegPrimaryKey.HKCC:```HKEY_CURRENT_CONFIG```<br>
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项,并指定其子项类型为字符串值且值为\and":**<br>
 ```new RegAdd().add(RegPrimaryKey.HKCR, "AAM\\shell\\test","REG_SZ","\\and\\\"");```<br>
 
->最后更新:2020.10.27
+>最后更新:2020.11.20

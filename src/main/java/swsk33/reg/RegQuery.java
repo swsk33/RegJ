@@ -43,16 +43,18 @@ public class RegQuery {
 	 */
 	public String query(String primaryKey, String name) throws Exception {
 		String result = "";
-		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /s";
-		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
-		BufferedReader br = new BufferedReader(isr);
-		String cdr = br.readLine();
-		while (cdr != null) {
-			result = result + cdr + "\r\n";
-			cdr = br.readLine();
+		if (isRegExists(primaryKey, name)) {
+			String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /s";
+			Process run = Runtime.getRuntime().exec(cmd);
+			InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
+			BufferedReader br = new BufferedReader(isr);
+			String cdr = br.readLine();
+			while (cdr != null) {
+				result = result + cdr + "\r\n";
+				cdr = br.readLine();
+			}
+			br.close();
 		}
-		br.close();
 		return result;
 	}
 
@@ -67,16 +69,18 @@ public class RegQuery {
 	 */
 	public String query(String primaryKey, String name, String objectName) throws Exception {
 		String result = "";
-		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /v " + "\"" + objectName + "\"";
-		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
-		BufferedReader br = new BufferedReader(isr);
-		String cdr = br.readLine();
-		while (cdr != null) {
-			result = result + cdr + "\r\n";
-			cdr = br.readLine();
+		if (isRegExists(primaryKey, name, objectName)) {
+			String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /v " + "\"" + objectName + "\"";
+			Process run = Runtime.getRuntime().exec(cmd);
+			InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
+			BufferedReader br = new BufferedReader(isr);
+			String cdr = br.readLine();
+			while (cdr != null) {
+				result = result + cdr + "\r\n";
+				cdr = br.readLine();
+			}
+			br.close();
 		}
-		br.close();
 		return result;
 	}
 
@@ -91,19 +95,23 @@ public class RegQuery {
 	 */
 	public Map<String, Map<String, String>> queryValue(String primaryKey, String name) throws Exception {
 		Map<String, Map<String, String>> result = new HashMap<String, Map<String, String>>();
-		String queryValue = this.query(primaryKey, name);
-		String[] regValue = queryValue.substring(2, queryValue.length() - 4).split("\r\n\r\n");
-		for (String eachValue : regValue) {
-			String key = eachValue.substring(0, eachValue.indexOf("\r\n"));
-			String[] values = eachValue.substring(eachValue.indexOf("\r\n") + 2).split("\r\n");
-			Map<String, String> kvs = new HashMap<String, String>();
-			for (String valueOrigin : values) {
-				valueOrigin = valueOrigin.substring(4);
-				String keyName = valueOrigin.substring(0, valueOrigin.indexOf("    "));
-				String value = valueOrigin.substring(valueOrigin.lastIndexOf("    ") + 4);
-				kvs.put(keyName, value);
+		if (isRegExists(primaryKey, name)) {
+			String queryValue = this.query(primaryKey, name);
+			String[] regValue = queryValue.substring(2, queryValue.length() - 4).split("\r\n\r\n");
+			for (String eachValue : regValue) {
+				String key = eachValue.substring(0, eachValue.indexOf("\r\n"));
+				String[] values = eachValue.substring(eachValue.indexOf("\r\n") + 2).split("\r\n");
+				Map<String, String> kvs = new HashMap<String, String>();
+				for (String valueOrigin : values) {
+					valueOrigin = valueOrigin.substring(4);
+					String keyName = valueOrigin.substring(0, valueOrigin.indexOf("    "));
+					String value = valueOrigin.substring(valueOrigin.lastIndexOf("    ") + 4);
+					kvs.put(keyName, value);
+				}
+				result.put(key, kvs);
 			}
-			result.put(key, kvs);
+		} else {
+			result = null;
 		}
 		return result;
 	}
@@ -118,8 +126,12 @@ public class RegQuery {
 	 * @throws Exception 权限问题抛出异常
 	 */
 	public String queryValue(String primaryKey, String name, String objectName) throws Exception {
-		String queryValue = this.query(primaryKey, name, objectName);
-		return queryValue.substring(queryValue.lastIndexOf("    ") + 4, queryValue.length() - 4);
+		String result = "";
+		if (isRegExists(primaryKey, name, objectName)) {
+			String queryValue = this.query(primaryKey, name, objectName);
+			result = queryValue.substring(queryValue.lastIndexOf("    ") + 4, queryValue.length() - 4);
+		}
+		return result;
 	}
 
 	/**
@@ -132,16 +144,18 @@ public class RegQuery {
 	 */
 	public String queryDefault(String primaryKey, String name) throws Exception {
 		String result = "";
-		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /ve";
-		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
-		BufferedReader br = new BufferedReader(isr);
-		String cdr = br.readLine();
-		while (cdr != null) {
-			result = result + cdr + "\r\n";
-			cdr = br.readLine();
+		if (isRegExists(primaryKey, name)) {
+			String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /ve";
+			Process run = Runtime.getRuntime().exec(cmd);
+			InputStreamReader isr = new InputStreamReader(run.getInputStream(), getCharSet());
+			BufferedReader br = new BufferedReader(isr);
+			String cdr = br.readLine();
+			while (cdr != null) {
+				result = result + cdr + "\r\n";
+				cdr = br.readLine();
+			}
+			br.close();
 		}
-		br.close();
 		return result;
 	}
 
@@ -154,8 +168,12 @@ public class RegQuery {
 	 * @throws Exception 权限问题抛出异常
 	 */
 	public String queryDefaultValue(String primaryKey, String name) throws Exception {
-		String result = this.queryDefault(primaryKey, name);
-		return result.substring(result.lastIndexOf("    ") + 4, result.length() - 4);
+		String result = "";
+		if (isRegExists(primaryKey, name)) {
+			String queryValue = this.queryDefault(primaryKey, name);
+			result = queryValue.substring(queryValue.lastIndexOf("    ") + 4, queryValue.length() - 4);
+		}
+		return result;
 	}
 
 	/**

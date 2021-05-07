@@ -1,4 +1,4 @@
-package swsk33.reg.exception;
+package com.gitee.swsk33.reg.exception;
 
 public class TypeErrorException extends Exception {
 

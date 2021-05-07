@@ -1,4 +1,4 @@
-package swsk33.reg;
+package com.gitee.swsk33.reg;
 
 import java.io.File;
 
@@ -19,10 +19,10 @@ public class RegExport {
 	 * @return 布尔值 导出成功返回true
 	 * @throws Exception 权限不足抛出异常
 	 */
-	public boolean export(String primaryKey, String name, String filePath) throws Exception {
+	public static boolean export(String primaryKey, String name, String filePath) throws Exception {
 		boolean success = false;
 		String cmd = "cmd /c reg export \"" + primaryKey + name + "\"" + " " + "\"" + filePath + "\"" + " /y";
-		Process run = Runtime.getRuntime().exec(cmd);
+		Runtime.getRuntime().exec(cmd);
 		if (new File(filePath).exists()) {
 			success = true;
 		}

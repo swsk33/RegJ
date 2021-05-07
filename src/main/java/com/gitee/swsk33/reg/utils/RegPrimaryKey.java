@@ -1,4 +1,4 @@
-package swsk33.reg.utils;
+package com.gitee.swsk33.reg.utils;
 
 /**
  * 注册表主键

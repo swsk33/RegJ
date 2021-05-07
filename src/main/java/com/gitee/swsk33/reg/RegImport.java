@@ -1,4 +1,4 @@
-package swsk33.reg;
+package com.gitee.swsk33.reg;
 
 /**
  * 从文件导入注册表
@@ -14,9 +14,9 @@ public class RegImport {
 	 * @param filePath 导入的reg文件路径
 	 * @throws Exception 权限不足抛出异常
 	 */
-	public void importReg(String filePath) throws Exception {
+	public static void importReg(String filePath) throws Exception {
 		String cmd = "cmd /c regedit /s " + "\"" + filePath + "\"";
-		Process run = Runtime.getRuntime().exec(cmd);
+		Runtime.getRuntime().exec(cmd);
 	}
 
 }

@@ -46,7 +46,7 @@ import com.gitee.swsk33.reg.*;
 * static String queryDefaultValue(String primaryKey, String name)：精确查询注册表的值，查询注册表某一项默认值的值
 * static boolean isRegExists(String primaryKey, String name)：判断注册表下的某一项是否存在
 * static boolean isRegExists(String primaryKey, String name, String objectName)：判断注册表下的某一项的值是否存在
-* static boolean isRegDefaultExists(String primaryKey, String name)：判断注册表下的某一项的默认值是有内容（不为空）
+* static boolean isRegDefaultExists(String primaryKey, String name)：判断注册表下的某一项的默认值是有内容（不为空）<br>
 **上述type（值的类型）参数可选常量对应如下：**<br>
 ```RegDataType.REG_SZ```:字符串值<br>
 ```RegDataType.REG_MULTI_SZ```:多字符串值<br>
@@ -61,7 +61,8 @@ RegPrimaryKey.HKCU:```HKEY_CURRENT_USER```<br>
 RegPrimaryKey.HKLM:```HKEY_LOCAL_MACHINE```<br>
 RegPrimaryKey.HKU:```HKEY_USERS```<br>
 RegPrimaryKey.HKCC:```HKEY_CURRENT_CONFIG```<br>
-
+<br>
+**详细的使用可以在调用类的方法时查看，IDE中会显示其中的详细文档**<br>
 ### 实例
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项:**<br>
 ```RegAdd.add(RegPrimaryKey.HKCR, "AAM\\shell\\test");```<br>

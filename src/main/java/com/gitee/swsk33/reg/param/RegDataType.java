@@ -1,4 +1,4 @@
-package com.gitee.swsk33.reg.utils;
+package com.gitee.swsk33.reg.param;
 
 /**
  * 注册表数据类型

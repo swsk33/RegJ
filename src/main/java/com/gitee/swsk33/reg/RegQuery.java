@@ -28,7 +28,7 @@ public class RegQuery {
 	/**
 	 * 查询注册表下的某项及其所有值的名称、类型和值
 	 * 
-	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.utils.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
+	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
 	 * @param name       查询的项名称
 	 * @return String 查询结果
 	 * @throws Exception 权限问题抛出异常
@@ -53,7 +53,7 @@ public class RegQuery {
 	/**
 	 * 查询注册表下的某项的值的信息
 	 * 
-	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.utils.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
+	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
 	 * @param name       查询的项名称
 	 * @param objectName 待查询的值的名字
 	 * @return String 查询结果
@@ -79,7 +79,7 @@ public class RegQuery {
 	/**
 	 * 精确查询注册表的值，查询注册表某一项的值及其子项的值
 	 * 
-	 * @param primaryKey 要查询的注册表主键，值位于com.gitee.swsk33.reg.utils.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
+	 * @param primaryKey 要查询的注册表主键，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
 	 * @param name       要查询的项名称
 	 * @return Map&lt;String, Map&lt;String, String&gt;&gt;
 	 *         查询的注册表项与值，Map对象的键是注册表项名，值也是一个Map对象，为该项下所有值的集合，这个Map对象中键是注册表该项之下的值的名称，值即为对应值
@@ -111,7 +111,7 @@ public class RegQuery {
 	/**
 	 * 精确查询注册表的值，查询注册表某一项之下的值的值
 	 * 
-	 * @param primaryKey 要查询的注册表主键，值位于com.gitee.swsk33.reg.utils.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
+	 * @param primaryKey 要查询的注册表主键，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
 	 * @param name       要查询的项名称
 	 * @param objectName 待查询的值的名字
 	 * @return String 查询的结果
@@ -129,7 +129,7 @@ public class RegQuery {
 	/**
 	 * 查询注册表下的某项的默认值的信息
 	 * 
-	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.utils.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
+	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
 	 * @param name       查询项的名称
 	 * @return String 查询结果
 	 * @throws Exception 权限问题抛出异常
@@ -154,7 +154,7 @@ public class RegQuery {
 	/**
 	 * 精确查询注册表的值，查询注册表某一项默认值的值
 	 * 
-	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.utils.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
+	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
 	 * @param name       查询项的名称
 	 * @return String 查询结果
 	 * @throws Exception 权限问题抛出异常
@@ -171,7 +171,7 @@ public class RegQuery {
 	/**
 	 * 判断注册表下的某一项是否存在
 	 * 
-	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.utils.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
+	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
 	 * @param name       判断项的名称
 	 * @return boolean 项是否存在
 	 * @throws Exception 权限问题抛出异常
@@ -200,7 +200,7 @@ public class RegQuery {
 	/**
 	 * 判断注册表下的某一项的值是否存在
 	 * 
-	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.utils.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
+	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
 	 * @param name       判断项的名称
 	 * @param objectName 判断的值的名称
 	 * @return boolean 值是否存在
@@ -230,7 +230,7 @@ public class RegQuery {
 	/**
 	 * 判断注册表下的某一项的默认值是有内容（不为空）
 	 * 
-	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.utils.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
+	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
 	 * @param name       判断项的名称
 	 * @return boolean 默认值是否存在
 	 * @throws Exception 权限问题抛出异常

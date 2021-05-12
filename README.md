@@ -16,7 +16,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>reg-java</artifactId>
-    <version>3.5.0</version>
+    <version>3.5.1</version>
 </dependency>
 ```
 ### 2，导入com.gitee.swsk33.reg下所有类或者需要的类。
@@ -62,7 +62,9 @@ RegPrimaryKey.HKLM:```HKEY_LOCAL_MACHINE```<br>
 RegPrimaryKey.HKU:```HKEY_USERS```<br>
 RegPrimaryKey.HKCC:```HKEY_CURRENT_CONFIG```<br>
 
-**详细的使用可以在调用类的方法时查看，IDE中会显示其中的详细文档**<br>
+*上述RegDataType和RegPrimaryKey位于com.gitee.swsk33.reg.param下。*
+
+**详细的使用可以在调用类的方法时查看，IDE中会显示其中的详细文档**
 
 ### 实例
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项:**<br>
@@ -78,4 +80,4 @@ RegPrimaryKey.HKCC:```HKEY_CURRENT_CONFIG```<br>
 **若有\（反斜杠）,则用\\\\（两个反斜杠）代替！**<br>
 **例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项,并指定其子项类型为字符串值且值为\and":**<br>
 ```RegAdd.add(RegPrimaryKey.HKCR, "AAM\\shell\\test","REG_SZ","\\and\\\"");```<br>
->最后更新:2021.5.7
+>最后更新:2021.5.12

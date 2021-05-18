@@ -4,24 +4,11 @@ import com.gitee.swsk33.reg.exception.TypeErrorException;
 
 /**
  * 添加注册表项
- * 
+ *
  * @author swsk33
  *
  */
 public class RegAdd {
-
-	/**
-	 * 处理注册表值字符串的方法。
-	 * 一般注册表值的双百分号（例如%Path%）会被识别成变量并直接代值，而我们想单纯地插入%Path%，用^%可以插入百分号。但如果用双引号括起来，^号也会被一起插入。因此这个方法用于把%变成"^%"，那么字符串值"C:\\Program
-	 * Files;%Path%"会变成"C:\\Program Files;"^%"Path"^%""，即可把变量原封不动地插入。
-	 * 
-	 * @param origin 传入字符串
-	 * @return 字符串
-	 */
-	private static String stringProcessing(String origin) {
-		origin = origin.replace("%", "\"^%\"");
-		return origin;
-	}
 
 	/**
 	 * 在注册表里面添加空项
@@ -33,8 +20,8 @@ public class RegAdd {
 	 */
 	public static boolean add(String primaryKey, String name) throws Exception {
 		boolean success = false;
-		String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /f";
-		Process run = Runtime.getRuntime().exec(stringProcessing(cmd));
+		String cmd = "cmd /c reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /f";
+		Process run = Runtime.getRuntime().exec(cmd);
 		run.waitFor();
 		if (RegQuery.isRegExists(primaryKey, name)) {
 			success = true;
@@ -53,8 +40,8 @@ public class RegAdd {
 	 */
 	public static boolean add(String primaryKey, String name, String data) throws Exception {
 		boolean success = false;
-		String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /d " + "\"" + data + "\"" + " /f";
-		Process run = Runtime.getRuntime().exec(stringProcessing(cmd));
+		String cmd = "cmd /c reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
+		Process run = Runtime.getRuntime().exec(cmd);
 		run.waitFor();
 		if (RegQuery.queryDefault(primaryKey, name).contains(data)) {
 			success = true;
@@ -75,8 +62,8 @@ public class RegAdd {
 	public static boolean add(String primaryKey, String name, String type, String data) throws Exception {
 		boolean success = false;
 		if (type.equalsIgnoreCase("REG_SZ") || type.equalsIgnoreCase("REG_MULTI_SZ") || type.equalsIgnoreCase("REG_EXPAND_SZ") || type.equalsIgnoreCase("REG_DWORD") || type.equalsIgnoreCase("REG_QWORD") || type.equalsIgnoreCase("REG_BINARY") || type.equalsIgnoreCase("REG_NONE")) {
-			String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /t " + "\"" + type + "\"" + " /d " + "\"" + data + "\"" + " /f";
-			Process run = Runtime.getRuntime().exec(stringProcessing(cmd));
+			String cmd = "cmd /c reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /t " + "\"" + type + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
+			Process run = Runtime.getRuntime().exec(cmd);
 			run.waitFor();
 			if (RegQuery.queryDefault(primaryKey, name).contains(data) && RegQuery.queryDefault(primaryKey, name).contains(type)) {
 				success = true;
@@ -88,7 +75,7 @@ public class RegAdd {
 	}
 
 	/**
-	 * 在注册表里面添加项并指定项中值的类型、名称和值（若该项已存在，则会在该项中添加值）
+	 * 在注册表里面添加项，并在项中添加键值，指定其中值的类型、名称和值（若该项已存在，则会在该项中添加值）
 	 * 
 	 * @param primaryKey 要操作的注册表主键，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
 	 * @param name       项名称
@@ -101,8 +88,8 @@ public class RegAdd {
 	public static boolean add(String primaryKey, String name, String type, String objectName, String data) throws Exception {
 		boolean success = false;
 		if (type.equalsIgnoreCase("REG_SZ") || type.equalsIgnoreCase("REG_MULTI_SZ") || type.equalsIgnoreCase("REG_EXPAND_SZ") || type.equalsIgnoreCase("REG_DWORD") || type.equalsIgnoreCase("REG_QWORD") || type.equalsIgnoreCase("REG_BINARY") || type.equalsIgnoreCase("REG_NONE")) {
-			String cmd = "cmd /c reg add \"" + primaryKey + name + "\"" + " /t " + "\"" + type + "\"" + " /v " + "\"" + objectName + "\"" + " /d " + "\"" + data + "\"" + " /f";
-			Process run = Runtime.getRuntime().exec(stringProcessing(cmd));
+			String cmd = "cmd /c reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /t " + "\"" + type + "\"" + " /v " + "\"" + InternalUtils.stringProcessing(objectName) + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
+			Process run = Runtime.getRuntime().exec(cmd);
 			run.waitFor();
 			if (RegQuery.query(primaryKey, name, objectName).contains(data) && RegQuery.query(primaryKey, name, objectName).contains(type)) {
 				success = true;

@@ -16,7 +16,7 @@ public class RegQuery {
 
 	private static String charSet = "UTF-8";
 
-	public RegQuery() {
+	static {
 		Locale locale = Locale.getDefault();
 		if (locale.getLanguage().equals("zh")) {
 			charSet = "GBK";
@@ -35,19 +35,17 @@ public class RegQuery {
 	 */
 	public static String query(String primaryKey, String name) throws Exception {
 		String result = "";
-		if (isRegExists(primaryKey, name)) {
-			String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /s";
-			Process run = Runtime.getRuntime().exec(cmd);
-			InputStreamReader isr = new InputStreamReader(run.getInputStream(), charSet);
-			BufferedReader br = new BufferedReader(isr);
-			String cdr = br.readLine();
-			while (cdr != null) {
-				result = result + cdr + "\r\n";
-				cdr = br.readLine();
-			}
-			br.close();
+		String command = "cmd /c reg query \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /s";
+		Process run = Runtime.getRuntime().exec(command);
+		InputStreamReader inputStream = new InputStreamReader(run.getInputStream(), charSet);
+		BufferedReader reader = new BufferedReader(inputStream);
+		String eachLine = "";
+		while ((eachLine = reader.readLine()) != null) {
+			result = result + eachLine + "\r\n";
 		}
-		return result;
+		inputStream.close();
+		reader.close();
+		return result.trim();
 	}
 
 	/**
@@ -61,19 +59,17 @@ public class RegQuery {
 	 */
 	public static String query(String primaryKey, String name, String objectName) throws Exception {
 		String result = "";
-		if (isRegExists(primaryKey, name, objectName)) {
-			String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /v " + "\"" + objectName + "\"";
-			Process run = Runtime.getRuntime().exec(cmd);
-			InputStreamReader isr = new InputStreamReader(run.getInputStream(), charSet);
-			BufferedReader br = new BufferedReader(isr);
-			String cdr = br.readLine();
-			while (cdr != null) {
-				result = result + cdr + "\r\n";
-				cdr = br.readLine();
-			}
-			br.close();
+		String command = "cmd /c reg query \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /v " + "\"" + InternalUtils.stringProcessing(objectName) + "\"";
+		Process run = Runtime.getRuntime().exec(command);
+		InputStreamReader inputStream = new InputStreamReader(run.getInputStream(), charSet);
+		BufferedReader reader = new BufferedReader(inputStream);
+		String eachLine = "";
+		while ((eachLine = reader.readLine()) != null) {
+			result = result + eachLine + "\r\n";
 		}
-		return result;
+		inputStream.close();
+		reader.close();
+		return result.trim();
 	}
 
 	/**
@@ -89,16 +85,29 @@ public class RegQuery {
 		Map<String, Map<String, String>> result = new HashMap<String, Map<String, String>>();
 		if (isRegExists(primaryKey, name)) {
 			String queryValue = query(primaryKey, name);
-			String[] regValue = queryValue.substring(2, queryValue.length() - 4).split("\r\n\r\n");
+			String[] regValue = queryValue.split("\r\n\r\n");
 			for (String eachValue : regValue) {
-				String key = eachValue.substring(0, eachValue.indexOf("\r\n"));
-				String[] values = eachValue.substring(eachValue.indexOf("\r\n") + 2).split("\r\n");
-				Map<String, String> kvs = new HashMap<String, String>();
-				for (String valueOrigin : values) {
-					valueOrigin = valueOrigin.substring(4);
-					String keyName = valueOrigin.substring(0, valueOrigin.indexOf("    "));
-					String value = valueOrigin.substring(valueOrigin.lastIndexOf("    ") + 4);
-					kvs.put(keyName, value);
+				String key = "";
+				Map<String, String> kvs = null;
+				if (eachValue.contains("\r\n")) {
+					key = eachValue.substring(0, eachValue.indexOf("\r\n"));
+					String[] values = eachValue.substring(eachValue.indexOf("\r\n") + 2).split("\r\n");
+					kvs = new HashMap<String, String>();
+					for (String valueOrigin : values) {
+						valueOrigin = valueOrigin.trim();
+						String[] eachValueInfo = valueOrigin.split("    ");
+						String keyName = "";
+						String value = "";
+						keyName = eachValueInfo[0];
+						if (eachValueInfo.length == 3) {
+							value = eachValueInfo[2];
+						} else {
+							value = "";
+						}
+						kvs.put(keyName, value);
+					}
+				} else {
+					key = eachValue;
 				}
 				result.put(key, kvs);
 			}
@@ -119,9 +128,9 @@ public class RegQuery {
 	 */
 	public static String queryValue(String primaryKey, String name, String objectName) throws Exception {
 		String result = "";
-		if (isRegExists(primaryKey, name, objectName)) {
+		if (!isRegValueBlank(primaryKey, name, objectName)) {
 			String queryValue = query(primaryKey, name, objectName);
-			result = queryValue.substring(queryValue.lastIndexOf("    ") + 4, queryValue.length() - 4);
+			result = queryValue.substring(queryValue.lastIndexOf("    ") + 4, queryValue.length());
 		}
 		return result;
 	}
@@ -136,19 +145,17 @@ public class RegQuery {
 	 */
 	public static String queryDefault(String primaryKey, String name) throws Exception {
 		String result = "";
-		if (isRegExists(primaryKey, name)) {
-			String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /ve";
-			Process run = Runtime.getRuntime().exec(cmd);
-			InputStreamReader isr = new InputStreamReader(run.getInputStream(), charSet);
-			BufferedReader br = new BufferedReader(isr);
-			String cdr = br.readLine();
-			while (cdr != null) {
-				result = result + cdr + "\r\n";
-				cdr = br.readLine();
-			}
-			br.close();
+		String command = "cmd /c reg query \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /ve";
+		Process run = Runtime.getRuntime().exec(command);
+		InputStreamReader inputStream = new InputStreamReader(run.getInputStream(), charSet);
+		BufferedReader reader = new BufferedReader(inputStream);
+		String eachLine = "";
+		while ((eachLine = reader.readLine()) != null) {
+			result = result + eachLine + "\r\n";
 		}
-		return result;
+		inputStream.close();
+		reader.close();
+		return result.trim();
 	}
 
 	/**
@@ -163,7 +170,30 @@ public class RegQuery {
 		String result = "";
 		if (isRegExists(primaryKey, name)) {
 			String queryValue = queryDefault(primaryKey, name);
-			result = queryValue.substring(queryValue.lastIndexOf("    ") + 4, queryValue.length() - 4);
+			result = queryValue.substring(queryValue.lastIndexOf("    ") + 4, queryValue.length());
+		}
+		return result;
+	}
+
+	/**
+	 * 检测注册表某一项下的指定的值是否为空白（值存在而无内容）
+	 * 
+	 * @param primaryKey 要查询的主键名，值位于com.gitee.swsk33.reg.param.RegPrimaryKey类中（例如RegPrimaryKey.HKCR即为HKEY_CLASSES_ROOT）
+	 * @param name       项的名称
+	 * @param objectName 值的名称
+	 * @return 当值的值为空白或者值不存在时为true
+	 * @throws Exception 权限问题异常
+	 */
+	public static boolean isRegValueBlank(String primaryKey, String name, String objectName) throws Exception {
+		boolean result = false;
+		if (isRegExists(primaryKey, name, objectName)) {
+			String queryResult = query(primaryKey, name, objectName);
+			queryResult = queryResult.substring(queryResult.indexOf("\r\n") + 2, queryResult.length()).trim();
+			if (queryResult.split("    ").length == 2) {
+				result = true;
+			}
+		} else {
+			result = true;
 		}
 		return result;
 	}
@@ -177,24 +207,7 @@ public class RegQuery {
 	 * @throws Exception 权限问题抛出异常
 	 */
 	public static boolean isRegExists(String primaryKey, String name) throws Exception {
-		boolean result = false;
-		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"";
-		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream(), charSet);
-		BufferedReader br = new BufferedReader(isr);
-		String cdr = br.readLine();
-		String res = "";
-		while (cdr != null) {
-			res = res + cdr + "\r\n";
-			cdr = br.readLine();
-		}
-		br.close();
-		if (res.equals("")) {
-			result = false;
-		} else {
-			result = true;
-		}
-		return result;
+		return !query(primaryKey, name).equals("");
 	}
 
 	/**
@@ -207,24 +220,7 @@ public class RegQuery {
 	 * @throws Exception 权限问题抛出异常
 	 */
 	public static boolean isRegExists(String primaryKey, String name, String objectName) throws Exception {
-		boolean result = false;
-		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /v " + "\"" + objectName + "\"";
-		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream(), charSet);
-		BufferedReader br = new BufferedReader(isr);
-		String cdr = br.readLine();
-		String res = "";
-		while (cdr != null) {
-			res = res + cdr + "\r\n";
-			cdr = br.readLine();
-		}
-		br.close();
-		if (res.equals("" + "\r\n" + "" + "\r\n" + "") || res.equals("")) {
-			result = false;
-		} else {
-			result = true;
-		}
-		return result;
+		return !query(primaryKey, name, objectName).equals("");
 	}
 
 	/**
@@ -236,24 +232,7 @@ public class RegQuery {
 	 * @throws Exception 权限问题抛出异常
 	 */
 	public static boolean isRegDefaultExists(String primaryKey, String name) throws Exception {
-		boolean result = false;
-		String cmd = "cmd /c reg query \"" + primaryKey + name + "\"" + " /ve";
-		Process run = Runtime.getRuntime().exec(cmd);
-		InputStreamReader isr = new InputStreamReader(run.getInputStream(), charSet);
-		BufferedReader br = new BufferedReader(isr);
-		String cdr = br.readLine();
-		String res = "";
-		while (cdr != null) {
-			res = res + cdr + "\r\n";
-			cdr = br.readLine();
-		}
-		br.close();
-		if (res.contains("数值未设置") || res.equals("")) {
-			result = false;
-		} else {
-			result = true;
-		}
-		return result;
+		return !queryDefault(primaryKey, name).equals("") && !queryDefault(primaryKey, name).contains("数值未设置");
 	}
 
 }

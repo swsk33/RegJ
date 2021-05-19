@@ -1,6 +1,7 @@
 package com.gitee.swsk33.reg;
 
 import com.gitee.swsk33.reg.exception.TypeErrorException;
+import com.gitee.swsk33.reg.param.RegDataType;
 
 /**
  * 添加注册表项
@@ -65,8 +66,18 @@ public class RegAdd {
 			String cmd = "reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /t " + "\"" + type + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
 			Process run = Runtime.getRuntime().exec(cmd);
 			run.waitFor();
-			if (RegQuery.queryDefault(primaryKey, name).contains(data) && RegQuery.queryDefault(primaryKey, name).contains(type)) {
-				success = true;
+			if (type.equalsIgnoreCase(RegDataType.REG_DWORD) || type.equalsIgnoreCase(RegDataType.REG_QWORD)) {
+				if (RegQuery.queryDefault(primaryKey, name).toLowerCase().contains(Integer.toHexString(Integer.parseInt(data)).toLowerCase()) && RegQuery.queryDefault(primaryKey, name).contains(type)) {
+					success = true;
+				}
+			} else if (type.equalsIgnoreCase(RegDataType.REG_BINARY)) {
+				if (RegQuery.queryDefault(primaryKey, name).toLowerCase().contains(data.toLowerCase()) && RegQuery.queryDefault(primaryKey, name).contains(type)) {
+					success = true;
+				}
+			} else {
+				if (RegQuery.queryDefault(primaryKey, name).contains(data) && RegQuery.queryDefault(primaryKey, name).contains(type)) {
+					success = true;
+				}
 			}
 		} else {
 			throw new TypeErrorException();
@@ -91,8 +102,18 @@ public class RegAdd {
 			String cmd = "reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /t " + "\"" + type + "\"" + " /v " + "\"" + InternalUtils.stringProcessing(objectName) + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
 			Process run = Runtime.getRuntime().exec(cmd);
 			run.waitFor();
-			if (RegQuery.query(primaryKey, name, objectName).contains(data) && RegQuery.query(primaryKey, name, objectName).contains(type)) {
-				success = true;
+			if (type.equalsIgnoreCase(RegDataType.REG_DWORD) || type.equalsIgnoreCase(RegDataType.REG_QWORD)) {
+				if (RegQuery.query(primaryKey, name, objectName).toLowerCase().contains(Integer.toHexString(Integer.parseInt(data)).toLowerCase()) && RegQuery.query(primaryKey, name, objectName).contains(type)) {
+					success = true;
+				}
+			} else if (type.equalsIgnoreCase(RegDataType.REG_BINARY)) {
+				if (RegQuery.query(primaryKey, name, objectName).toLowerCase().contains(data.toLowerCase()) && RegQuery.query(primaryKey, name, objectName).contains(type)) {
+					success = true;
+				}
+			} else {
+				if (RegQuery.query(primaryKey, name, objectName).contains(data) && RegQuery.query(primaryKey, name, objectName).contains(type)) {
+					success = true;
+				}
 			}
 		} else {
 			throw new TypeErrorException();

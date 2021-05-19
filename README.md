@@ -7,6 +7,7 @@
 3，查询注册表项。<br>
 4，从reg文件导入注册表项。<br>
 5，把指定注册表项导出。<br>
+6，常规注册表位置的快捷操作。<br>
 ### 下载地址:[点击进入下载jar包](https://gitee.com/swsk33/RegJ/releases)
 ## 使用方法：
 ### 1，添加依赖，有下列两种情况：
@@ -16,7 +17,7 @@
 <dependency>
     <groupId>com.gitee.swsk33</groupId>
     <artifactId>reg-java</artifactId>
-    <version>3.5.1</version>
+    <version>4.0.0</version>
 </dependency>
 ```
 ### 2，导入com.gitee.swsk33.reg下所有类或者需要的类。
@@ -44,9 +45,20 @@ import com.gitee.swsk33.reg.*;
 * static String queryValue(String primaryKey, String name, String objectName)：精确查询注册表的值，查询注册表某一项之下的值的值
 * static String queryDefault(String primaryKey, String name)：查询注册表下的某项的默认值的信息
 * static String queryDefaultValue(String primaryKey, String name)：精确查询注册表的值，查询注册表某一项默认值的值
+* static boolean isRegValueBlank(String primaryKey, String name, String objectName)：检测注册表某一项下的指定的值是否为空白（值存在而无内容）
 * static boolean isRegExists(String primaryKey, String name)：判断注册表下的某一项是否存在
 * static boolean isRegExists(String primaryKey, String name, String objectName)：判断注册表下的某一项的值是否存在
-* static boolean isRegDefaultExists(String primaryKey, String name)：判断注册表下的某一项的默认值是有内容（不为空）<br>
+* static boolean isRegDefaultExists(String primaryKey, String name)：判断注册表下的某一项的默认值是有内容（不为空）
+#### 类*KeyRegPlace*：位于com.gitee.swsk33.reg.util下，常规关键位置的注册表操作：
+* static boolean addBootOption(String name, String exec)：添加开机启动项
+* static boolean addFileOrDirRightMenu(String name, String exec)：添加文件（夹）右键菜单
+* static boolean addFileOrDirRightMenu(String name, String exec, String iconPath)：添加带图标的文件（夹）右键菜单
+* static boolean addDirectoryBackgroundMenu(String name, String exec)：添加文件夹背景/桌面右键菜单
+* static boolean addDirectoryBackgroundMenu(String name, String exec, String iconPath)：添加带图标的文件夹背景/桌面右键菜单
+* static boolean addUninstallInfo(String name, String installPath, String uninstallString)：添加软件卸载信息
+* static boolean addUninstallInfo(String name, String installPath, String uninstallString, String iconPath, String version, long size)：添加软件卸载信息
+* static boolean addUninstallInfo(UninstallInfo info)：添加软件卸载信息
+
 **上述type（值的类型）参数可选常量对应如下：**<br>
 ```RegDataType.REG_SZ```:字符串值<br>
 ```RegDataType.REG_MULTI_SZ```:多字符串值<br>
@@ -76,8 +88,5 @@ RegPrimaryKey.HKCC:```HKEY_CURRENT_CONFIG```<br>
 **例如把HKEY_CLASSES_ROOT里的AAM\shell导出到E盘，保存为exp.reg:**<br>
 ```RegExport.export(RegPrimaryKey.HKCR, "AAM\\shell", "E:\\exp.reg");```<br>
 
-**注意！若某项的值里面有"（双引号），请在方法参数中用\\\\\\"（三反斜杠加一个双引号）代替！单引号相同。**<br>
-**若有\（反斜杠）,则用\\\\（两个反斜杠）代替！**<br>
-**例如给HKEY_CLASSES_ROOT里的AAM\shell里面加一个名为test的项,并指定其子项类型为字符串值且值为\and":**<br>
-```RegAdd.add(RegPrimaryKey.HKCR, "AAM\\shell\\test","REG_SZ","\\and\\\"");```<br>
->最后更新:2021.5.12
+**注意，特殊符号不需要手动转义，在进行操作之前包会先对特殊符号进行转义再执行！**<br>
+>最后更新:2021.5.19

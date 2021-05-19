@@ -35,7 +35,7 @@ public class RegQuery {
 	 */
 	public static String query(String primaryKey, String name) throws Exception {
 		String result = "";
-		String command = "cmd /c reg query \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /s";
+		String command = "reg query \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /s";
 		Process run = Runtime.getRuntime().exec(command);
 		InputStreamReader inputStream = new InputStreamReader(run.getInputStream(), charSet);
 		BufferedReader reader = new BufferedReader(inputStream);
@@ -59,7 +59,7 @@ public class RegQuery {
 	 */
 	public static String query(String primaryKey, String name, String objectName) throws Exception {
 		String result = "";
-		String command = "cmd /c reg query \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /v " + "\"" + InternalUtils.stringProcessing(objectName) + "\"";
+		String command = "reg query \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /v " + "\"" + InternalUtils.stringProcessing(objectName) + "\"";
 		Process run = Runtime.getRuntime().exec(command);
 		InputStreamReader inputStream = new InputStreamReader(run.getInputStream(), charSet);
 		BufferedReader reader = new BufferedReader(inputStream);
@@ -145,7 +145,7 @@ public class RegQuery {
 	 */
 	public static String queryDefault(String primaryKey, String name) throws Exception {
 		String result = "";
-		String command = "cmd /c reg query \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /ve";
+		String command = "reg query \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /ve";
 		Process run = Runtime.getRuntime().exec(command);
 		InputStreamReader inputStream = new InputStreamReader(run.getInputStream(), charSet);
 		BufferedReader reader = new BufferedReader(inputStream);

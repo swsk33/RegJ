@@ -21,7 +21,7 @@ public class RegExport {
 	 */
 	public static boolean export(String primaryKey, String name, String filePath) throws Exception {
 		boolean success = false;
-		String cmd = "cmd /c reg export \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " " + "\"" + filePath + "\"" + " /y";
+		String cmd = "reg export \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " " + "\"" + filePath + "\"" + " /y";
 		Runtime.getRuntime().exec(cmd);
 		if (new File(filePath).exists()) {
 			success = true;

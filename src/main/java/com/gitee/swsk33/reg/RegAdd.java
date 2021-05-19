@@ -20,7 +20,7 @@ public class RegAdd {
 	 */
 	public static boolean add(String primaryKey, String name) throws Exception {
 		boolean success = false;
-		String cmd = "cmd /c reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /f";
+		String cmd = "reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 		run.waitFor();
 		if (RegQuery.isRegExists(primaryKey, name)) {
@@ -40,7 +40,7 @@ public class RegAdd {
 	 */
 	public static boolean add(String primaryKey, String name, String data) throws Exception {
 		boolean success = false;
-		String cmd = "cmd /c reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
+		String cmd = "reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 		run.waitFor();
 		if (RegQuery.queryDefault(primaryKey, name).contains(data)) {
@@ -62,7 +62,7 @@ public class RegAdd {
 	public static boolean add(String primaryKey, String name, String type, String data) throws Exception {
 		boolean success = false;
 		if (type.equalsIgnoreCase("REG_SZ") || type.equalsIgnoreCase("REG_MULTI_SZ") || type.equalsIgnoreCase("REG_EXPAND_SZ") || type.equalsIgnoreCase("REG_DWORD") || type.equalsIgnoreCase("REG_QWORD") || type.equalsIgnoreCase("REG_BINARY") || type.equalsIgnoreCase("REG_NONE")) {
-			String cmd = "cmd /c reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /t " + "\"" + type + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
+			String cmd = "reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /t " + "\"" + type + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
 			Process run = Runtime.getRuntime().exec(cmd);
 			run.waitFor();
 			if (RegQuery.queryDefault(primaryKey, name).contains(data) && RegQuery.queryDefault(primaryKey, name).contains(type)) {
@@ -88,7 +88,7 @@ public class RegAdd {
 	public static boolean add(String primaryKey, String name, String type, String objectName, String data) throws Exception {
 		boolean success = false;
 		if (type.equalsIgnoreCase("REG_SZ") || type.equalsIgnoreCase("REG_MULTI_SZ") || type.equalsIgnoreCase("REG_EXPAND_SZ") || type.equalsIgnoreCase("REG_DWORD") || type.equalsIgnoreCase("REG_QWORD") || type.equalsIgnoreCase("REG_BINARY") || type.equalsIgnoreCase("REG_NONE")) {
-			String cmd = "cmd /c reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /t " + "\"" + type + "\"" + " /v " + "\"" + InternalUtils.stringProcessing(objectName) + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
+			String cmd = "reg add \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /t " + "\"" + type + "\"" + " /v " + "\"" + InternalUtils.stringProcessing(objectName) + "\"" + " /d " + "\"" + InternalUtils.stringProcessing(data) + "\"" + " /f";
 			Process run = Runtime.getRuntime().exec(cmd);
 			run.waitFor();
 			if (RegQuery.query(primaryKey, name, objectName).contains(data) && RegQuery.query(primaryKey, name, objectName).contains(type)) {

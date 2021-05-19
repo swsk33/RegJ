@@ -62,13 +62,17 @@ public class KeyRegPlace {
 	 * @exception 权限问题异常
 	 */
 	public static boolean addFileOrDirRightMenu(String name, String exec, String iconPath) throws Exception {
-		String type = RegDataType.REG_SZ;
+		String valueType = RegDataType.REG_SZ;
 		if (exec.contains("%")) {
-			type = RegDataType.REG_EXPAND_SZ;
+			valueType = RegDataType.REG_EXPAND_SZ;
+		}
+		String iconPathType = RegDataType.REG_SZ;
+		if (iconPath.contains("%")) {
+			iconPathType = RegDataType.REG_EXPAND_SZ;
 		}
 		boolean addOption = RegAdd.add(RegPrimaryKey.HKCR, "*\\shell\\" + name, RegDataType.REG_SZ, name);
-		boolean addIcon = RegAdd.add(RegPrimaryKey.HKCR, "*\\shell\\", type, "Icon", iconPath);
-		boolean addCommand = RegAdd.add(RegPrimaryKey.HKCR, "*\\shell\\" + name + "\\command", type, exec);
+		boolean addIcon = RegAdd.add(RegPrimaryKey.HKCR, "*\\shell\\" + name, iconPathType, "Icon", iconPath);
+		boolean addCommand = RegAdd.add(RegPrimaryKey.HKCR, "*\\shell\\" + name + "\\command", valueType, exec);
 		return addOption && addIcon && addCommand;
 	}
 

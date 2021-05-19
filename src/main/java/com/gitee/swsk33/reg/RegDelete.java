@@ -18,7 +18,7 @@ public class RegDelete {
 	 */
 	public static boolean del(String primaryKey, String name) throws Exception {
 		boolean success = false;
-		String cmd = "cmd /c reg delete \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /f";
+		String cmd = "reg delete \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 		run.waitFor();
 		if (!RegQuery.isRegExists(primaryKey, name)) {
@@ -38,7 +38,7 @@ public class RegDelete {
 	 */
 	public static boolean del(String primaryKey, String name, String objectName) throws Exception {
 		boolean success = false;
-		String cmd = "cmd /c reg delete \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /v " + "\"" + InternalUtils.stringProcessing(objectName) + "\"" + " /f";
+		String cmd = "reg delete \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /v " + "\"" + InternalUtils.stringProcessing(objectName) + "\"" + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 		run.waitFor();
 		if (!RegQuery.isRegExists(primaryKey, name, objectName)) {
@@ -57,7 +57,7 @@ public class RegDelete {
 	 */
 	public static boolean delDefaultValue(String primaryKey, String name) throws Exception {
 		boolean success = false;
-		String cmd = "cmd /c reg delete \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /ve " + " /f";
+		String cmd = "reg delete \"" + primaryKey + InternalUtils.stringProcessing(name) + "\"" + " /ve " + " /f";
 		Process run = Runtime.getRuntime().exec(cmd);
 		run.waitFor();
 		if (!RegQuery.isRegDefaultExists(primaryKey, name)) {

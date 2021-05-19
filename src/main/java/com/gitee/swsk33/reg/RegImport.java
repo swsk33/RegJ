@@ -15,7 +15,7 @@ public class RegImport {
 	 * @throws Exception 权限不足抛出异常
 	 */
 	public static void importReg(String filePath) throws Exception {
-		String cmd = "cmd /c regedit /s " + "\"" + filePath + "\"";
+		String cmd = "regedit /s " + "\"" + filePath + "\"";
 		Runtime.getRuntime().exec(cmd);
 	}
 

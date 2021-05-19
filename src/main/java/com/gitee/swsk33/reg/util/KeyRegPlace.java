@@ -1,6 +1,7 @@
 package com.gitee.swsk33.reg.util;
 
 import com.gitee.swsk33.reg.RegAdd;
+import com.gitee.swsk33.reg.exception.UninstallInfoDeficiencyException;
 import com.gitee.swsk33.reg.param.RegDataType;
 import com.gitee.swsk33.reg.param.RegPrimaryKey;
 import com.gitee.swsk33.reg.param.UninstallInfo;
@@ -139,9 +140,10 @@ public class KeyRegPlace {
 		}
 		String optionName = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\" + name;
 		boolean addOption = RegAdd.add(RegPrimaryKey.HKLM, optionName);
+		boolean addName = RegAdd.add(RegPrimaryKey.HKLM, optionName, RegDataType.REG_SZ, "DisplayName", name);
 		boolean addinstallPath = RegAdd.add(RegPrimaryKey.HKLM, optionName, installPathType, "InstallLocation", installPath);
 		boolean adduninstallPath = RegAdd.add(RegPrimaryKey.HKLM, optionName, uninstallType, "UninstallString", uninstallString);
-		return addOption && addinstallPath && adduninstallPath;
+		return addOption && addName && addinstallPath && adduninstallPath;
 	}
 
 	/**
@@ -171,28 +173,94 @@ public class KeyRegPlace {
 		}
 		String optionName = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\" + name;
 		boolean addOption = RegAdd.add(RegPrimaryKey.HKLM, optionName);
+		boolean addName = RegAdd.add(RegPrimaryKey.HKLM, optionName, RegDataType.REG_SZ, "DisplayName", name);
 		boolean addinstallPath = RegAdd.add(RegPrimaryKey.HKLM, optionName, installPathType, "InstallLocation", installPath);
 		boolean adduninstallPath = RegAdd.add(RegPrimaryKey.HKLM, optionName, uninstallType, "UninstallString", uninstallString);
 		boolean addIcon = RegAdd.add(RegPrimaryKey.HKLM, optionName, iconType, "DisplayIcon", iconPath);
 		boolean addVersion = RegAdd.add(RegPrimaryKey.HKLM, optionName, RegDataType.REG_SZ, "DisplayVersion", version);
 		boolean addSize = RegAdd.add(RegPrimaryKey.HKLM, optionName, RegDataType.REG_DWORD, "EstimatedSize", String.valueOf(size));
-		return addOption && addinstallPath && adduninstallPath && addIcon && addVersion && addSize;
+		return addOption && addName && addinstallPath && adduninstallPath && addIcon && addVersion && addSize;
 	}
 
 	/**
 	 * 添加软件卸载信息（设置-应用中的卸载列表）
 	 * 
-	 * @param info 是UninstallInfo的实例，该类位于com.gitee.swsk33.reg.param之下，通过实例化该类并设定实例内的属性（例如软件名，卸载命令等等）然后传入
+	 * @param info 是UninstallInfo的实例，该类位于com.gitee.swsk33.reg.param之下，通过实例化该类并设定实例的属性（例如软件名，卸载命令等等）然后传入，其中软件显示名称和卸载命令是不能为空的项
 	 * @return 是否添加成功
 	 * @throws Exception 权限问题异常
 	 */
 	public static boolean addUninstallInfo(UninstallInfo info) throws Exception {
+		if (info.getDisplayName() == null || info.getUninstallString() == null) {
+			throw new UninstallInfoDeficiencyException();
+		}
 		String installPathType = RegDataType.REG_SZ;
 		String uninstallType = RegDataType.REG_SZ;
-
+		String iconType = RegDataType.REG_SZ;
+		String modifyType = RegDataType.REG_SZ;
+		if (info.getInstallPath().contains("%")) {
+			installPathType = RegDataType.REG_EXPAND_SZ;
+		}
+		if (info.getUninstallString().contains("%")) {
+			uninstallType = RegDataType.REG_EXPAND_SZ;
+		}
+		if (info.getDisplayIcon().contains("%")) {
+			iconType = RegDataType.REG_EXPAND_SZ;
+		}
+		if (info.getModifyPath().contains("%")) {
+			modifyType = RegDataType.REG_EXPAND_SZ;
+		}
 		String optionName = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\" + info.getDisplayName();
-
-		return false;
+		if (!RegAdd.add(RegPrimaryKey.HKLM, optionName)) {
+			return false;
+		}
+		if (!RegAdd.add(RegPrimaryKey.HKLM, optionName, RegDataType.REG_SZ, "DisplayName", info.getDisplayName())) {
+			return false;
+		}
+		if (!RegAdd.add(RegPrimaryKey.HKLM, optionName, uninstallType, "UninstallString", info.getUninstallString())) {
+			return false;
+		}
+		if (info.getDisplayIcon() != null) {
+			if (!RegAdd.add(RegPrimaryKey.HKLM, optionName, iconType, "DisplayIcon", info.getDisplayIcon())) {
+				return false;
+			}
+		}
+		if (info.getDisplayVersion() != null) {
+			if (!RegAdd.add(RegPrimaryKey.HKLM, optionName, RegDataType.REG_SZ, "DisplayVersion", info.getDisplayVersion())) {
+				return false;
+			}
+		}
+		if (info.getPublisher() != null) {
+			if (!RegAdd.add(RegPrimaryKey.HKLM, optionName, RegDataType.REG_SZ, "Publisher", info.getPublisher())) {
+				return false;
+			}
+		}
+		if (info.getEstimatedSize() != null) {
+			if (!RegAdd.add(RegPrimaryKey.HKLM, optionName, RegDataType.REG_DWORD, "EstimatedSize", String.valueOf(info.getEstimatedSize()))) {
+				return false;
+			}
+		}
+		if (info.getInstallPath() != null) {
+			if (!RegAdd.add(RegPrimaryKey.HKLM, optionName, installPathType, "InstallLocation", info.getInstallPath())) {
+				return false;
+			}
+		}
+		if (info.getModifyPath() != null) {
+			if (!RegAdd.add(RegPrimaryKey.HKLM, optionName, modifyType, "ModifyPath", info.getModifyPath())) {
+				return false;
+			}
+		}
+		int noModify = 1;
+		int noRepair = 1;
+		if (!info.isNoModify()) {
+			noModify = 0;
+		}
+		if (!info.isNoRepair()) {
+			noRepair = 0;
+		}
+		if (!RegAdd.add(RegPrimaryKey.HKLM, optionName, RegDataType.REG_DWORD, "NoModify", String.valueOf(noModify)) || !RegAdd.add(RegPrimaryKey.HKLM, optionName, RegDataType.REG_DWORD, "NoRepair", String.valueOf(noRepair))) {
+			return false;
+		}
+		return true;
 	}
 
 }

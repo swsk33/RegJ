@@ -31,7 +31,7 @@ public class UninstallInfo {
 	/**
 	 * 软件大小（单位kb）
 	 */
-	private long EstimatedSize;
+	private Long EstimatedSize;
 
 	/**
 	 * 软件安装位置
@@ -102,14 +102,14 @@ public class UninstallInfo {
 		this.publisher = publisher;
 	}
 
-	public long getEstimatedSize() {
+	public Long getEstimatedSize() {
 		return EstimatedSize;
 	}
 
 	/**
 	 * 设定软件大小（单位kb）
 	 */
-	public void setEstimatedSize(long estimatedSize) {
+	public void setEstimatedSize(Long estimatedSize) {
 		EstimatedSize = estimatedSize;
 	}
 
@@ -129,7 +129,7 @@ public class UninstallInfo {
 	}
 
 	/**
-	 * 设定卸载命令
+	 * 设定卸载命令，一般是卸载程序的所在路径
 	 */
 	public void setUninstallString(String uninstallString) {
 		this.uninstallString = uninstallString;
@@ -140,7 +140,7 @@ public class UninstallInfo {
 	}
 
 	/**
-	 * 设定修改命令
+	 * 设定修改命令，一般是修改程序的主要路径
 	 */
 	public void setModifyPath(String modifyPath) {
 		this.modifyPath = modifyPath;
